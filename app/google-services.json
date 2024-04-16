@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "661827044691",
+    "project_id": "orderfoodapp-c580b",
+    "storage_bucket": "orderfoodapp-c580b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661827044691:android:7649a86fd97d6f7744cda6",
+        "android_client_info": {
+          "package_name": "com.example.foodorderapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeezas3DNfmgiy14aKKEGx-Y-w9Tuv1P8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
