@@ -1,13 +1,16 @@
 package com.example.foodorderapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +34,7 @@ import com.example.foodorderapp.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends BaseFragment {
 
@@ -38,6 +42,7 @@ public class HomeFragment extends BaseFragment {
 
     private List<Food> mListFood;
     private List<Food> mListFoodPopular;
+    private static final int REQUEST_CODE_SPEECH_INPUT = 1;
 
     private final Handler mHandlerBanner = new Handler();
     private final Runnable mRunnableBanner = new Runnable() {
@@ -95,6 +100,23 @@ public class HomeFragment extends BaseFragment {
         });
 
         mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchFood());
+        mFragmentHomeBinding.imgMic.setOnClickListener(view -> {
+            //clear text in edt search before speak
+            mFragmentHomeBinding.edtSearchName.setText("");
+
+            Intent intent
+                    = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "vi-VN");
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text");
+
+            try {
+                startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mFragmentHomeBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -103,6 +125,18 @@ public class HomeFragment extends BaseFragment {
             }
             return false;
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SPEECH_INPUT) {
+            if (resultCode == getActivity().RESULT_OK && null != data) {
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                mFragmentHomeBinding.edtSearchName.setText(result.get(0));
+                searchFood();
+            }
+        }
     }
 
     private void displayListFoodPopular() {

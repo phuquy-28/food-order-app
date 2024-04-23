@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FC5353</color>
-    <color name="colorPrimaryDark">#FC5353</color>
-    <color name="colorAccent">#FC5353</color>
+    <color name="colorPrimary">#01B14F</color>
+    <color name="colorPrimaryDark">#01B14F</color>
+    <color name="colorAccent">#01B14F</color>
 
     <color name="textColorPrimary">#121315</color>
     <color name="textColorSecondary">#6D6E70</color>
@@ -22,7 +22,7 @@
     <color name="yellow">#FF9800</color>
     <color name="blue">#2196F3</color>
 
-    <color name="bottomTabActive">#F24040</color>
+    <color name="bottomTabActive">#01B14F</color>
     <color name="bottomTabInActive">#171717</color>
     <color name="black_overlay">#667C7474</color>
 </resources>
