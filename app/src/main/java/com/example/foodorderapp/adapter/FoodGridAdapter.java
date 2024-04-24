@@ -50,7 +50,7 @@ public class FoodGridAdapter extends RecyclerView.Adapter<FoodGridAdapter.FoodGr
             holder.mItemFoodGridBinding.tvSaleOff.setVisibility(View.VISIBLE);
             holder.mItemFoodGridBinding.tvPrice.setVisibility(View.VISIBLE);
 
-            String strSale = "Giảm " + food.getSale() + "%";
+            String strSale = food.getSale() + "%";
             holder.mItemFoodGridBinding.tvSaleOff.setText(strSale);
 
             String strOldPrice = food.getPrice() + Constant.CURRENCY;

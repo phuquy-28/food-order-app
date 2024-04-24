@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.foodorderapp.prefs.DataStoreManager;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -63,7 +64,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false);
-
+        mFragmentHomeBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
         getListFoodFromFirebase("");
         initListener();
 

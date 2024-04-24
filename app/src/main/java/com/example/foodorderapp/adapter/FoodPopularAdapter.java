@@ -42,7 +42,7 @@ public class FoodPopularAdapter extends RecyclerView.Adapter<FoodPopularAdapter.
             holder.mItemFoodPopularBinding.tvSaleOff.setVisibility(View.GONE);
         } else {
             holder.mItemFoodPopularBinding.tvSaleOff.setVisibility(View.VISIBLE);
-            String strSale = "Giảm " + food.getSale() + "%";
+            String strSale = food.getSale() + "%";
             holder.mItemFoodPopularBinding.tvSaleOff.setText(strSale);
         }
         holder.mItemFoodPopularBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(food));
