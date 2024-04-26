@@ -71,6 +71,15 @@ public class AdminFoodAdapter extends RecyclerView.Adapter<AdminFoodAdapter.Admi
 
         holder.mItemAdminFoodBinding.imgEdit.setOnClickListener(v -> iOnManagerFoodListener.onClickUpdateFood(food));
         holder.mItemAdminFoodBinding.imgDelete.setOnClickListener(v -> iOnManagerFoodListener.onClickDeleteFood(food));
+        holder.mItemAdminFoodBinding.btnShowText.setOnClickListener(v -> onClickShowDecriptFood(holder,food));
+
+    }
+
+    private void onClickShowDecriptFood(AdminFoodViewHolder holder, Food food) {
+        if (holder.mItemAdminFoodBinding.tvFoodDescription.getVisibility() == View.VISIBLE)
+            holder.mItemAdminFoodBinding.tvFoodDescription.setVisibility(View.GONE);
+        else if (holder.mItemAdminFoodBinding.tvFoodDescription.getVisibility() == View.GONE)
+            holder.mItemAdminFoodBinding.tvFoodDescription.setVisibility(View.VISIBLE);
     }
 
     @Override
