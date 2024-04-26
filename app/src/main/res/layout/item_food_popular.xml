@@ -19,14 +19,18 @@
         android:id="@+id/tv_sale_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/define_dimen_10"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/border_background"
+        android:backgroundTint="@color/colorPrimary"
         android:padding="@dimen/define_dimen_6"
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_xsmall"
         android:textStyle="bold"
-        tools:ignore="RelativeOverlap" />
+        tools:ignore="RelativeOverlap"
+        android:gravity="center"
+        app:drawableStartCompat="@drawable/flame"
+        />
 
 </RelativeLayout>

@@ -6,6 +6,10 @@
         <item name="colorPrimaryDark">#01B14F</item>
     </style>
 
+    <style name="AppTheme.MaterialCardView" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
     <declare-styleable name="AspectRatioView">
         <attr name="aspectRatioEnabled" format="boolean" />
         <attr name="dominantMeasurement" format="enum">
@@ -34,10 +38,10 @@
     <attr name="titleColorInactive" format="color" />
 
     <declare-styleable name="PropertyBottomNavigation">
-        <attr name="itemActiveColor"/>
-        <attr name="itemInactiveColor"/>
-        <attr name="titleColorActive"/>
-        <attr name="titleColorInactive"/>
+        <attr name="itemActiveColor" />
+        <attr name="itemInactiveColor" />
+        <attr name="titleColorActive" />
+        <attr name="titleColorInactive" />
     </declare-styleable>
 
 </resources>

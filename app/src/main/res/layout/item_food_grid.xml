@@ -5,18 +5,22 @@
     android:id="@+id/layout_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/define_dimen_10"
-    android:layout_marginEnd="@dimen/define_dimen_10"
+    android:layout_marginTop="@dimen/define_dimen_5"
+    android:layout_marginBottom="@dimen/define_dimen_5"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:background="@drawable/border_background"
+    android:padding="1dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/define_dimen_6">
+        app:cardCornerRadius="@dimen/define_dimen_10">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/define_dimen_120">
+            android:layout_height="150dp">
 
             <ImageView
                 android:id="@+id/img_food"
@@ -29,14 +33,17 @@
                 android:id="@+id/tv_sale_off"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="@dimen/define_dimen_10"
-                android:background="@color/colorPrimary"
-                android:padding="@dimen/define_dimen_6"
+                android:padding="@dimen/define_dimen_2"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_xsmall"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@drawable/border_background"
+                android:backgroundTint="@color/colorPrimary"
+                app:drawableStartCompat="@drawable/flame" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -44,9 +51,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="@dimen/define_dimen_6"
-        android:paddingEnd="@dimen/define_dimen_6"
-        android:paddingBottom="@dimen/define_dimen_6">
+        android:paddingTop="@dimen/define_dimen_10"
+        android:paddingEnd="@dimen/define_dimen_10"
+        android:paddingStart="@dimen/define_dimen_10"
+        android:paddingBottom="@dimen/define_dimen_10">
 
         <TextView
             android:id="@+id/tv_food_name"
