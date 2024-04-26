@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Food Order Pro Java</string>
+    <string name="app_name">FoodOrderApp</string>
 
     // Tab Menu
-    <string name="home">Đồ ăn</string>
+    <string name="home">Trang chủ</string>
     <string name="cart">Giỏ hàng</string>
-    <string name="feedback">Phản hồi</string>
+    <string name="feedback">Đánh giá</string>
     <string name="contact">Liên hệ</string>
     <string name="account">Tài khoản</string>
     <string name="order">Đơn hàng</string>
@@ -166,4 +166,10 @@
     <string name="msg_delete_title">Xác nhận xóa</string>
     <string name="msg_confirm_delete">Bạn có chắc chắn muốn xóa mục này không?</string>
     <string name="msg_delete_movie_successfully">Xoá món ăn thành công !!!</string>
+    <string name="welcome">Xin chào,</string>
+    <string name="user_welcome">user@gmail.com</string>
+    <string name="rice">Cơm</string>
+    <string name="noodle">Bún/Phở</string>
+    <string name="spagetti">Mì</string>
+    <string name="drinks">Đồ uống</string>
 </resources>

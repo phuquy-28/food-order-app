@@ -3,7 +3,11 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">#FC5353</item>
+        <item name="colorPrimaryDark">#01B14F</item>
+    </style>
+
+    <style name="AppTheme.MaterialCardView" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
     </style>
 
     <declare-styleable name="AspectRatioView">
@@ -34,10 +38,10 @@
     <attr name="titleColorInactive" format="color" />
 
     <declare-styleable name="PropertyBottomNavigation">
-        <attr name="itemActiveColor"/>
-        <attr name="itemInactiveColor"/>
-        <attr name="titleColorActive"/>
-        <attr name="titleColorInactive"/>
+        <attr name="itemActiveColor" />
+        <attr name="itemInactiveColor" />
+        <attr name="titleColorActive" />
+        <attr name="titleColorInactive" />
     </declare-styleable>
 
 </resources>

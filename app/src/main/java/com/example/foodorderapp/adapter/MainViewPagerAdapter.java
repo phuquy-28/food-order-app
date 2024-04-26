@@ -7,7 +7,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.foodorderapp.fragment.AccountFragment;
 import com.example.foodorderapp.fragment.CartFragment;
-import com.example.foodorderapp.fragment.ContactFragment;
 import com.example.foodorderapp.fragment.FeedbackFragment;
 import com.example.foodorderapp.fragment.HomeFragment;
 
@@ -31,9 +30,6 @@ public class MainViewPagerAdapter extends FragmentStateAdapter {
                 return new FeedbackFragment();
 
             case 3:
-                return new ContactFragment();
-
-            case 4:
                 return new AccountFragment();
 
             default:
@@ -43,6 +39,6 @@ public class MainViewPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 4;
     }
 }

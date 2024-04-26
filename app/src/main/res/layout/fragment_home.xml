@@ -6,37 +6,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:visibility="gone"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp">
+
+        <ImageView
+            android:id="@+id/iv_user"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_avatar_default" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/welcome"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/iv_user"
+            app:layout_constraintTop_toTopOf="@+id/iv_user" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_welcome"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_user"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:id="@+id/layout_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="@dimen/define_dimen_20"
-        android:layout_marginStart="@dimen/define_dimen_10"
-        android:layout_marginEnd="@dimen/define_dimen_10">
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/border_background"
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/edt_search_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="3dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Search Food, Drink, etc"
+            android:inputType="textPersonName"
+            android:padding="3dp"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/img_mic"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_white_shape_border_red_corner_30"
-            android:hint="@string/hint_search_name"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:padding="@dimen/define_dimen_10"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="@dimen/text_size_xsmall"
-            tools:ignore="Autofill" />
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="42dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_mic"
+            tools:ignore="ContentDescription" />
 
         <View
+            android:id="@+id/divider"
             android:layout_width="1dp"
             android:layout_height="@dimen/define_dimen_30"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/img_search"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/grey" />
 
         <ImageView
             android:id="@+id/img_search"
@@ -53,7 +107,9 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/define_dimen_20">
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="@dimen/define_dimen_20"
+        android:layout_marginEnd="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,10 +127,18 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/viewpager_2"
+                    <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:theme="@style/AppTheme.MaterialCardView"
+                        app:cardCornerRadius="16dp">
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewpager_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </com.google.android.material.card.MaterialCardView>
 
                     <me.relex.circleindicator.CircleIndicator3
                         android:id="@+id/indicator_3"
@@ -83,6 +147,128 @@
                         android:layout_gravity="center"
                         app:ci_drawable="@drawable/bg_indicatior_selected"
                         app:ci_drawable_unselected="@drawable/bg_indicatior_unselected" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/category_background">
+
+                        <ImageView
+                            android:id="@+id/iv_rice"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/rice" />
+
+                        <TextView
+                            android:id="@+id/tv_rice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rice"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_rice"
+                            app:layout_constraintStart_toStartOf="@+id/iv_rice"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_rice" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/category_background">
+
+                        <ImageView
+                            android:id="@+id/iv_noodle"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/nodle" />
+
+                        <TextView
+                            android:id="@+id/tv_noodle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/noodle"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_noodle"
+                            app:layout_constraintStart_toStartOf="@+id/iv_noodle"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_noodle" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/category_background">
+
+                        <ImageView
+                            android:id="@+id/iv_spagetti"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/spagetti" />
+
+                        <TextView
+                            android:id="@+id/tv_spagetti"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/spagetti"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_spagetti"
+                            app:layout_constraintStart_toStartOf="@+id/iv_spagetti"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_spagetti" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="80dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/category_background">
+
+                        <ImageView
+                            android:id="@+id/iv_drinks"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/drinks" />
+
+                        <TextView
+                            android:id="@+id/tv_drinks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/drinks"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/iv_drinks"
+                            app:layout_constraintStart_toStartOf="@+id/iv_drinks"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_drinks" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
                 <TextView
@@ -100,10 +286,8 @@
                     android:id="@+id/rcv_food"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="false"
                     android:focusable="false"
-                    android:layout_marginStart="@dimen/define_dimen_10"
-                    android:layout_marginBottom="@dimen/define_dimen_10" />
+                    android:nestedScrollingEnabled="false" />
             </LinearLayout>
 
         </LinearLayout>
