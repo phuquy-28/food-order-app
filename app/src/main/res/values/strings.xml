@@ -114,6 +114,7 @@
     <string name="label_date_to">Đến ngày:</string>
 
     <string name="food_name">Tên món ăn(*)</string>
+    <string name="food_category">Loại món ăn(*)</string>
     <string name="food_description">Mô tả món ăn(*)</string>
     <string name="food_price">Giá món ăn(*)</string>
     <string name="food_discount">Khuyến mại(*)</string>
