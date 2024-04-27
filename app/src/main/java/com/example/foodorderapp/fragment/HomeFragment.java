@@ -1,6 +1,8 @@
 package com.example.foodorderapp.fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
@@ -14,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -44,6 +48,7 @@ public class HomeFragment extends BaseFragment {
     private List<Food> mListFood;
     private List<Food> mListFoodPopular;
     private static final int REQUEST_CODE_SPEECH_INPUT = 1;
+    private static final int RECORD_AUDIO_PERMISSION_REQUEST_CODE = 1001;
 
     private final Handler mHandlerBanner = new Handler();
     private final Runnable mRunnableBanner = new Runnable() {
@@ -102,21 +107,33 @@ public class HomeFragment extends BaseFragment {
 
         mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchFood());
         mFragmentHomeBinding.imgMic.setOnClickListener(view -> {
-            //clear text in edt search before speak
-            mFragmentHomeBinding.edtSearchName.setText("");
-
-            Intent intent
-                    = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "vi-VN");
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text");
-
-            try {
-                startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT);
-            } catch (Exception e) {
-                Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.RECORD_AUDIO},
+                        RECORD_AUDIO_PERMISSION_REQUEST_CODE);
+            } else {
+                startSpeechRecognition();
             }
+
+        });
+        mFragmentHomeBinding.ivRice.setOnClickListener(v -> {
+            if (mListFood != null) mListFood.clear();
+            getFoodFromFirebaseByCategory("Cơm");
+        });
+
+        mFragmentHomeBinding.ivNoodle.setOnClickListener(v -> {
+            if (mListFood != null) mListFood.clear();
+            getFoodFromFirebaseByCategory("Bún/Phở");
+        });
+
+        mFragmentHomeBinding.ivSpagetti.setOnClickListener(v -> {
+            if (mListFood != null) mListFood.clear();
+            getFoodFromFirebaseByCategory("Mì");
+        });
+
+        mFragmentHomeBinding.ivDrinks.setOnClickListener(v -> {
+            if (mListFood != null) mListFood.clear();
+            getFoodFromFirebaseByCategory("Đồ uống");
         });
 
         mFragmentHomeBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
@@ -126,6 +143,23 @@ public class HomeFragment extends BaseFragment {
             }
             return false;
         });
+    }
+
+    public void startSpeechRecognition() {
+        //clear text in edt search before speak
+        mFragmentHomeBinding.edtSearchName.setText("");
+        Intent intent
+                = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "vi-VN");
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak to text");
+
+        try {
+            startActivityForResult(intent, REQUEST_CODE_SPEECH_INPUT);
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -198,6 +232,36 @@ public class HomeFragment extends BaseFragment {
                                 .contains(GlobalFunction.getTextSearch(key).toLowerCase().trim())) {
                             mListFood.add(0, food);
                         }
+                    }
+                }
+                displayListFoodPopular();
+                displayListFoodSuggest();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                GlobalFunction.showToastMessage(getActivity(), getString(R.string.msg_get_date_error));
+            }
+        });
+    }
+
+    private void getFoodFromFirebaseByCategory(String category) {
+        if (getActivity() == null) {
+            return;
+        }
+        ControllerApplication.get(getActivity()).getFoodDatabaseReference().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mListFood = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Food food = dataSnapshot.getValue(Food.class);
+                    if (food == null) {
+                        return;
+                    }
+
+                    String foodCategory = food.getCategory();
+                    if (foodCategory != null && foodCategory.equalsIgnoreCase(category)) {
+                        mListFood.add(0, food);
                     }
                 }
                 displayListFoodPopular();

@@ -28,6 +28,24 @@ public class FeedbackFragment extends BaseFragment {
 
         mFragmentFeedbackBinding.edtEmail.setText(DataStoreManager.getUser().getEmail());
         mFragmentFeedbackBinding.tvSendFeedback.setOnClickListener(v -> onClickSendFeedback());
+        mFragmentFeedbackBinding.ratingBar.setOnRatingBarChangeListener((ratingBar, rating, fromUser) -> {
+            if (rating <= 1) {
+                mFragmentFeedbackBinding.tvRatingTitle.setText(getString(R.string.one_star));
+                mFragmentFeedbackBinding.edtComment.setText(getString(R.string.one_star));
+            } else if (rating <= 2) {
+                mFragmentFeedbackBinding.tvRatingTitle.setText(getString(R.string.two_stars));
+                mFragmentFeedbackBinding.edtComment.setText(getString(R.string.two_stars));
+            } else if (rating <= 3) {
+                mFragmentFeedbackBinding.tvRatingTitle.setText(getString(R.string.three_stars));
+                mFragmentFeedbackBinding.edtComment.setText(getString(R.string.three_stars));
+            } else if (rating <= 4) {
+                mFragmentFeedbackBinding.tvRatingTitle.setText(getString(R.string.four_stars));
+                mFragmentFeedbackBinding.edtComment.setText(getString(R.string.four_stars));
+            } else {
+                mFragmentFeedbackBinding.tvRatingTitle.setText(getString(R.string.five_stars));
+                mFragmentFeedbackBinding.edtComment.setText(getString(R.string.five_stars));
+            }
+        });
 
         return mFragmentFeedbackBinding.getRoot();
     }
@@ -42,6 +60,9 @@ public class FeedbackFragment extends BaseFragment {
         String strPhone = mFragmentFeedbackBinding.edtPhone.getText().toString();
         String strEmail = mFragmentFeedbackBinding.edtEmail.getText().toString();
         String strComment = mFragmentFeedbackBinding.edtComment.getText().toString();
+        String strDate = GlobalFunction.getCurrentDateTime();
+        double rating = mFragmentFeedbackBinding.ratingBar.getRating();
+
 
         if (StringUtil.isEmpty(strName)) {
             GlobalFunction.showToastMessage(activity, getString(R.string.name_require));
@@ -49,13 +70,13 @@ public class FeedbackFragment extends BaseFragment {
             GlobalFunction.showToastMessage(activity, getString(R.string.comment_require));
         } else {
             activity.showProgressDialog(true);
-            Feedback feedback = new Feedback(strName, strPhone, strEmail, strComment);
+            Feedback feedback = new Feedback(strName, strPhone, strEmail, strComment, strDate, rating);
             ControllerApplication.get(getActivity()).getFeedbackDatabaseReference()
                     .child(String.valueOf(System.currentTimeMillis()))
                     .setValue(feedback, (databaseError, databaseReference) -> {
-                activity.showProgressDialog(false);
-                sendFeedbackSuccess();
-            });
+                        activity.showProgressDialog(false);
+                        sendFeedbackSuccess();
+                    });
         }
     }
 

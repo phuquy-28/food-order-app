@@ -2,6 +2,7 @@ package com.example.foodorderapp.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.foodorderapp.ControllerApplication;
@@ -32,6 +33,7 @@ public class AddFoodActivity extends BaseActivity {
         setContentView(mActivityAddFoodBinding.getRoot());
 
         getDataIntent();
+        initSpinner();
         initToolbar();
         initView();
 
@@ -44,6 +46,13 @@ public class AddFoodActivity extends BaseActivity {
             isUpdate = true;
             mFood = (Food) bundleReceived.get(Constant.KEY_INTENT_FOOD_OBJECT);
         }
+    }
+
+    private void initSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.category_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mActivityAddFoodBinding.spinnerCategory.setAdapter(adapter);
     }
 
     private void initToolbar() {
@@ -66,6 +75,7 @@ public class AddFoodActivity extends BaseActivity {
             mActivityAddFoodBinding.edtImageBanner.setText(mFood.getBanner());
             mActivityAddFoodBinding.chbPopular.setChecked(mFood.isPopular());
             mActivityAddFoodBinding.edtOtherImage.setText(getTextOtherImages());
+            mActivityAddFoodBinding.spinnerCategory.setSelection(GlobalFunction.getPositionCategory(this, mFood.getCategory()));
         } else {
             mActivityAddFoodBinding.toolbar.tvTitle.setText(getString(R.string.add_food));
             mActivityAddFoodBinding.btnAddOrEdit.setText(getString(R.string.action_add));
@@ -96,6 +106,7 @@ public class AddFoodActivity extends BaseActivity {
         String strImageBanner = mActivityAddFoodBinding.edtImageBanner.getText().toString().trim();
         boolean isPopular = mActivityAddFoodBinding.chbPopular.isChecked();
         String strOtherImages = mActivityAddFoodBinding.edtOtherImage.getText().toString().trim();
+        String strCategory = mActivityAddFoodBinding.spinnerCategory.getSelectedItem().toString();
         List<Image> listImages = new ArrayList<>();
         if (!StringUtil.isEmpty(strOtherImages)) {
             String[] temp = strOtherImages.split(";");
@@ -135,6 +146,11 @@ public class AddFoodActivity extends BaseActivity {
             return;
         }
 
+        if (StringUtil.isEmpty(strCategory)) {
+            Toast.makeText(this, getString(R.string.msg_category_food_require), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Update food
         if (isUpdate) {
             showProgressDialog(true);
@@ -146,17 +162,18 @@ public class AddFoodActivity extends BaseActivity {
             map.put("image", strImage);
             map.put("banner", strImageBanner);
             map.put("popular", isPopular);
+            map.put("category", strCategory);
             if (!listImages.isEmpty()) {
                 map.put("images", listImages);
             }
 
             ControllerApplication.get(this).getFoodDatabaseReference()
                     .child(String.valueOf(mFood.getId())).updateChildren(map, (error, ref) -> {
-                showProgressDialog(false);
-                Toast.makeText(AddFoodActivity.this,
-                        getString(R.string.msg_edit_food_success), Toast.LENGTH_SHORT).show();
-                GlobalFunction.hideSoftKeyboard(this);
-            });
+                        showProgressDialog(false);
+                        Toast.makeText(AddFoodActivity.this,
+                                getString(R.string.msg_edit_food_success), Toast.LENGTH_SHORT).show();
+                        GlobalFunction.hideSoftKeyboard(this);
+                    });
             return;
         }
 
@@ -164,23 +181,24 @@ public class AddFoodActivity extends BaseActivity {
         showProgressDialog(true);
         long foodId = System.currentTimeMillis();
         FoodObject food = new FoodObject(foodId, strName, strDescription, Integer.parseInt(strPrice),
-                Integer.parseInt(strDiscount), strImage, strImageBanner, isPopular);
+                Integer.parseInt(strDiscount), strImage, strImageBanner, isPopular, strCategory);
         if (!listImages.isEmpty()) {
             food.setImages(listImages);
         }
         ControllerApplication.get(this).getFoodDatabaseReference()
                 .child(String.valueOf(foodId)).setValue(food, (error, ref) -> {
-            showProgressDialog(false);
-            mActivityAddFoodBinding.edtName.setText("");
-            mActivityAddFoodBinding.edtDescription.setText("");
-            mActivityAddFoodBinding.edtPrice.setText("");
-            mActivityAddFoodBinding.edtDiscount.setText("");
-            mActivityAddFoodBinding.edtImage.setText("");
-            mActivityAddFoodBinding.edtImageBanner.setText("");
-            mActivityAddFoodBinding.chbPopular.setChecked(false);
-            mActivityAddFoodBinding.edtOtherImage.setText("");
-            GlobalFunction.hideSoftKeyboard(this);
-            Toast.makeText(this, getString(R.string.msg_add_food_success), Toast.LENGTH_SHORT).show();
-        });
+                    showProgressDialog(false);
+                    mActivityAddFoodBinding.edtName.setText("");
+                    mActivityAddFoodBinding.edtDescription.setText("");
+                    mActivityAddFoodBinding.edtPrice.setText("");
+                    mActivityAddFoodBinding.edtDiscount.setText("");
+                    mActivityAddFoodBinding.edtImage.setText("");
+                    mActivityAddFoodBinding.edtImageBanner.setText("");
+                    mActivityAddFoodBinding.chbPopular.setChecked(false);
+                    mActivityAddFoodBinding.edtOtherImage.setText("");
+                    mActivityAddFoodBinding.spinnerCategory.setSelection(0);
+                    GlobalFunction.hideSoftKeyboard(this);
+                    Toast.makeText(this, getString(R.string.msg_add_food_success), Toast.LENGTH_SHORT).show();
+                });
     }
 }

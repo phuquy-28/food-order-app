@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 
+import com.example.foodorderapp.R;
+import com.example.foodorderapp.activity.AddFoodActivity;
 import com.example.foodorderapp.activity.AdminMainActivity;
 import com.example.foodorderapp.activity.MainActivity;
 import com.example.foodorderapp.listener.IGetDateListener;
@@ -22,7 +24,10 @@ import com.example.foodorderapp.prefs.DataStoreManager;
 import com.example.foodorderapp.utils.StringUtil;
 
 import java.text.Normalizer;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class GlobalFunction {
@@ -170,5 +175,20 @@ public class GlobalFunction {
                 callBack, mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH),
                 mCalendar.get(Calendar.DATE));
         datePicker.show();
+    }
+
+    public static String getCurrentDateTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        return sdf.format(new Date());
+    }
+
+    public static int getPositionCategory(AddFoodActivity addFoodActivity, String category) {
+        String[] arrayCategory = addFoodActivity.getResources().getStringArray(R.array.category_array);
+        for (int i = 0; i < arrayCategory.length; i++) {
+            if (arrayCategory[i].equals(category)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

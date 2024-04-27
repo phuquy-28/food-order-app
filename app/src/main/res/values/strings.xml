@@ -55,7 +55,7 @@
     <string name="feedback_name">Họ và Tên (*)</string>
     <string name="feedback_email">Email</string>
     <string name="feedback_phone">Số điện thoại</string>
-    <string name="feedback_comment">Bình luận (*)</string>
+    <string name="feedback_comment">Nhận xét (*)</string>
     <string name="send_feedback">Gửi phản hồi</string>
 
     <string name="label_id">Mã đơn hàng:</string>
@@ -172,4 +172,12 @@
     <string name="noodle">Bún/Phở</string>
     <string name="spagetti">Mì</string>
     <string name="drinks">Đồ uống</string>
+    <string name="feedback_title">Chia Sẻ Đánh Giá Của Bạn</string>
+    <string name="five_stars">Tuyệt vời 😍😍😍</string>
+    <string name="four_stars">Tốt 😊😊</string>
+    <string name="three_stars">Bình thường 🤔</string>
+    <string name="two_stars">Kém 😐</string>
+    <string name="one_star">Tệ 🫤</string>
+    <string name="food_category">Danh mục (*)</string>
+    <string name="msg_category_food_require">Vui lòng chọn danh mục.</string>
 </resources>
