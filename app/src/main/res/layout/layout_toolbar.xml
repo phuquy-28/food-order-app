@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/define_dimen_100"
-    android:background="@drawable/bg_toolbar"
+    android:layout_height="?actionBarSize"
+    android:background="@color/colorPrimary"
     tools:ignore="ContentDescription" >
 
     <ImageView
@@ -15,19 +15,16 @@
         android:layout_marginEnd="@dimen/define_dimen_6"
         android:padding="@dimen/define_dimen_10"
         android:src="@drawable/ic_back_white_36"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/define_dimen_14"
+        android:layout_centerInParent="true"
         android:text="@string/app_name"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_xlarge"
-        android:textStyle="bold" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_xnormal" />
 
     <ImageView
         android:id="@+id/img_cart"
@@ -41,4 +38,3 @@
         android:visibility="gone" />
 
 </RelativeLayout>
-
