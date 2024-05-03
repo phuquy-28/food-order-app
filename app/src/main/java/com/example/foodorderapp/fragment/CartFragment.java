@@ -2,10 +2,15 @@ package com.example.foodorderapp.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.foodorderapp.activity.PaymentActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.example.foodorderapp.ControllerApplication;
@@ -41,6 +47,7 @@ public class CartFragment extends BaseFragment {
     private FragmentCartBinding mFragmentCartBinding;
     private CartAdapter mCartAdapter;
     private List<Food> mListFoodCart;
+    private int typePayment = 1;
     private int mAmount;
 
     @Nullable
@@ -168,10 +175,35 @@ public class CartFragment extends BaseFragment {
         TextView edtAddressOrder = viewDialog.findViewById(R.id.edt_address_order);
         TextView tvCancelOrder = viewDialog.findViewById(R.id.tv_cancel_order);
         TextView tvCreateOrder = viewDialog.findViewById(R.id.tv_create_order);
+        String[] items = new String[]{Constant.PAYMENT_METHOD_CASH, Constant.PAYMENT_METHOD_ZALO};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, items);
+        Spinner spinner = viewDialog.findViewById(R.id.spinner_payment_method);
 
         // Set data
         tvFoodsOrder.setText(getStringListFoodsOrder());
         tvPriceOrder.setText(mFragmentCartBinding.tvTotalPrice.getText().toString());
+        spinner.setAdapter(adapter);
+
+        // Control payment method
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = parent.getItemAtPosition(position).toString();
+                // Do something with selectedItem
+                Log.e("Selected item : ", selectedItem);
+                if (selectedItem.equals(Constant.PAYMENT_METHOD_CASH)) {
+                    typePayment = Constant.TYPE_PAYMENT_CASH;
+                } else if (selectedItem.equals(Constant.PAYMENT_METHOD_ZALO)) {
+                    typePayment = Constant.TYPE_PAYMENT_ZALO;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do something when nothing is selected
+
+            }
+        });
 
         // Set listener
         tvCancelOrder.setOnClickListener(v -> bottomSheetDialog.dismiss());
@@ -184,10 +216,18 @@ public class CartFragment extends BaseFragment {
             if (StringUtil.isEmpty(strName) || StringUtil.isEmpty(strPhone) || StringUtil.isEmpty(strAddress)) {
                 GlobalFunction.showToastMessage(getActivity(), getString(R.string.message_enter_infor_order));
             } else {
+                if (typePayment == Constant.TYPE_PAYMENT_ZALO) {
+                    Intent intent = new Intent(getActivity(), PaymentActivity.class);
+                    intent.putExtra("name", strName);
+                    intent.putExtra("phone", strPhone);
+                    intent.putExtra("address", strAddress);
+                    startActivity(intent);
+                    return;
+                }
                 long id = System.currentTimeMillis();
                 String strEmail = DataStoreManager.getUser().getEmail();
                 Order order = new Order(id, strName, strEmail, strPhone, strAddress,
-                        mAmount, getStringListFoodsOrder(), Constant.TYPE_PAYMENT_CASH, false);
+                        mAmount, getStringListFoodsOrder(), typePayment, false);
                 ControllerApplication.get(getActivity()).getBookingDatabaseReference()
                         .child(String.valueOf(id))
                         .setValue(order, (error1, ref1) -> {

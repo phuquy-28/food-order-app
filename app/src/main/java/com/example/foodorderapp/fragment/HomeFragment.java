@@ -39,7 +39,6 @@ import com.example.foodorderapp.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeFragment extends BaseFragment {
 
@@ -105,7 +104,10 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchFood());
+//        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchFood());
+        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> {
+            searchFood();
+        });
         mFragmentHomeBinding.imgMic.setOnClickListener(view -> {
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECORD_AUDIO)
                     != PackageManager.PERMISSION_GRANTED) {

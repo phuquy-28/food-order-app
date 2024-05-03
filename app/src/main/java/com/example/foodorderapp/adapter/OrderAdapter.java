@@ -58,6 +58,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         if (Constant.TYPE_PAYMENT_CASH == order.getPayment()) {
             paymentMethod = Constant.PAYMENT_METHOD_CASH;
         }
+        else if (Constant.TYPE_PAYMENT_ZALO == order.getPayment()) {
+            paymentMethod = Constant.PAYMENT_METHOD_ZALO;
+        }
         holder.mItemOrderBinding.tvPayment.setText(paymentMethod);
     }
 

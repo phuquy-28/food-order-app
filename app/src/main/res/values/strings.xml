@@ -85,8 +85,8 @@
     <string name="label_zalo">Zalo</string>
 
     <string name="sign_up">Đăng Ký</string>
-    <string name="sign_up_user">Đăng Ký Tài Khoản</string>
-    <string name="sign_in_user">Đăng Nhập Tài Khoản</string>
+    <string name="sign_up_user">Đăng Ký</string>
+    <string name="sign_in_user">Đăng Nhập</string>
     <string name="admin">Quản trị viên</string>
     <string name="user">Người dùng</string>
     <string name="have_account">Đã có tài khoản?</string>
