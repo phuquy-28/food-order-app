@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.foodorderapp.activity.PaymentActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -34,7 +35,6 @@ import com.example.foodorderapp.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class HomeFragment extends BaseFragment {
 
@@ -99,7 +99,11 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchFood());
+//        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> searchFood());
+        mFragmentHomeBinding.imgSearch.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), PaymentActivity.class);
+            startActivity(intent);
+        });
         mFragmentHomeBinding.imgMic.setOnClickListener(view -> {
             //clear text in edt search before speak
             mFragmentHomeBinding.edtSearchName.setText("");
