@@ -17,19 +17,28 @@ public class SignUpActivity extends BaseActivity {
 
     private ActivitySignUpBinding mActivitySignUpBinding;
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onCreate() được gọi khi Activity được khởi tạo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivitySignUpBinding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(mActivitySignUpBinding.getRoot());
 
-        mActivitySignUpBinding.rdbUser.setChecked(true);
-
+        // Khi click vào imgBack thì thoát Activity
         mActivitySignUpBinding.imgBack.setOnClickListener(v -> onBackPressed());
+        // Khi click vào layoutSignIn thì finish Activity dể quay lại màn hình đăng nhập
         mActivitySignUpBinding.layoutSignIn.setOnClickListener(v -> finish());
+        // Khi click vào btnSignUp thì gọi hàm onClickValidateSignUp()
         mActivitySignUpBinding.btnSignUp.setOnClickListener(v -> onClickValidateSignUp());
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickValidateSignUp() kiểm tra thông tin đăng ký
+    // Nếu email hoặc password rỗng thì hiển thị thông báo lỗi
+    // Nếu email không hợp lệ thì hiển thị thông báo lỗi
+    // Nếu email chứa chuỗi "admin" thì hiển thị thông báo lỗi
+    // Nếu thông tin hợp lệ thì gọi hàm signUpUser() để đăng ký
     private void onClickValidateSignUp() {
         String strEmail = mActivitySignUpBinding.edtEmail.getText().toString().trim();
         String strPassword = mActivitySignUpBinding.edtPassword.getText().toString().trim();
@@ -40,15 +49,6 @@ public class SignUpActivity extends BaseActivity {
         } else if (!StringUtil.isValidEmail(strEmail)) {
             Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid), Toast.LENGTH_SHORT).show();
         } else {
-            if (mActivitySignUpBinding.rdbAdmin.isChecked()) {
-                if (!strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
-                    Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_admin), Toast.LENGTH_SHORT).show();
-                } else {
-                    signUpUser(strEmail, strPassword);
-                }
-                return;
-            }
-
             if (strEmail.contains(Constant.ADMIN_EMAIL_FORMAT)) {
                 Toast.makeText(SignUpActivity.this, getString(R.string.msg_email_invalid_user), Toast.LENGTH_SHORT).show();
             } else {
@@ -57,6 +57,11 @@ public class SignUpActivity extends BaseActivity {
         }
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm signUpUser() đăng ký người dùng
+    // Sử dụng FirebaseAuth để tạo tài khoản mới với email và password
+    // Nếu đăng ký thành công thì lưu thông tin người dùng vào DataStoreManager và chuyển sang MainActivity
+    // Nếu đăng ký thất bại thì hiển thị thông báo lỗi
     private void signUpUser(String email, String password) {
         showProgressDialog(true);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -67,9 +72,6 @@ public class SignUpActivity extends BaseActivity {
                         FirebaseUser user = firebaseAuth.getCurrentUser();
                         if (user != null) {
                             User userObject = new User(user.getEmail(), password);
-                            if (user.getEmail() != null && user.getEmail().contains(Constant.ADMIN_EMAIL_FORMAT)) {
-                                userObject.setAdmin(true);
-                            }
                             DataStoreManager.setUser(userObject);
                             GlobalFunction.gotoMainActivity(this);
                             finishAffinity();

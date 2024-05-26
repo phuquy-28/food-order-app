@@ -21,10 +21,19 @@ public class ChangePasswordActivity extends BaseActivity {
         mActivityChangePasswordBinding = ActivityChangePasswordBinding.inflate(getLayoutInflater());
         setContentView(mActivityChangePasswordBinding.getRoot());
 
+        // Khi click vào imgBack thì thoát Activity
         mActivityChangePasswordBinding.imgBack.setOnClickListener(v -> onBackPressed());
+        // Khi click vào btnChangePassword thì gọi hàm onClickValidateChangePassword()
         mActivityChangePasswordBinding.btnChangePassword.setOnClickListener(v -> onClickValidateChangePassword());
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickValidateChangePassword() kiểm tra thông tin đổi mật khẩu
+    // Nếu mật khẩu cũ, mật khẩu mới hoặc xác nhận mật khẩu rỗng thì hiển thị thông báo lỗi
+    // Nếu mật khẩu cũ không đúng thì hiển thị thông báo lỗi
+    // Nếu mật khẩu mới và xác nhận mật khẩu không trùng nhau thì hiển thị thông báo lỗi
+    // Nếu mật khẩu cũ và mật khẩu mới trùng nhau thì hiển thị thông báo lỗi
+    // Nếu thông tin hợp lệ thì gọi hàm changePassword() để đổi mật khẩu
     private void onClickValidateChangePassword() {
         String strOldPassword = mActivityChangePasswordBinding.edtOldPassword.getText().toString().trim();
         String strNewPassword = mActivityChangePasswordBinding.edtNewPassword.getText().toString().trim();
@@ -46,6 +55,11 @@ public class ChangePasswordActivity extends BaseActivity {
         }
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm changePassword() đổi mật khẩu
+    // Đổi mật khẩu của tài khoản hiện tại
+    // Hiển thị thông báo đổi mật khẩu thành công
+    // Lưu mật khẩu mới vào SharedPreferences
     private void changePassword(String newPassword) {
         showProgressDialog(true);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

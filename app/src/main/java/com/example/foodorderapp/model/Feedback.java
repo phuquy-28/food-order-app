@@ -1,5 +1,8 @@
 package com.example.foodorderapp.model;
 
+// Người đảm nhận: Đặng Phú Quý
+// Lớp Feedback lưu thông tin phản hồi của người dùng
+// Lưu thông tin tên, số điện thoại, email, bình luận, ngày gửi và số sao
 public class Feedback {
 
     private String name;

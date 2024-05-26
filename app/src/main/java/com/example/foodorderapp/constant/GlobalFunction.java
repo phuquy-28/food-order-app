@@ -32,12 +32,22 @@ import java.util.regex.Pattern;
 
 public class GlobalFunction {
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm startActivity() chuyển sang màn hình mới
+    // Đặt flag FLAG_ACTIVITY_CLEAR_TOP và FLAG_ACTIVITY_NEW_TASK
+    // Để xóa hết các Activity trước đó và tạo một Activity mới
+    // Để tránh việc quay lại màn hình trước đó
     public static void startActivity(Context context, Class<?> clz) {
         Intent intent = new Intent(context, clz);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm startActivity() chuyển sang màn hình mới và truyền dữ liệu
+    // Đặt flag FLAG_ACTIVITY_CLEAR_TOP và FLAG_ACTIVITY_NEW_TASK
+    // Để xóa hết các Activity trước đó và tạo một Activity mới
+    // Để tránh việc quay lại màn hình trước đó
     public static void startActivity(Context context, Class<?> clz, Bundle bundle) {
         Intent intent = new Intent(context, clz);
         intent.putExtras(bundle);
@@ -45,6 +55,9 @@ public class GlobalFunction {
         context.startActivity(intent);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm gotoMainActivity() chuyển sang màn hình MainActivity hoặc AdminMainActivity
+    // Nếu người dùng là admin thì chuyển sang AdminMainActivity ngược lại chuyển sang MainActivity
     public static void gotoMainActivity(Context context) {
         if (DataStoreManager.getUser().isAdmin()) {
             GlobalFunction.startActivity(context, AdminMainActivity.class);
@@ -53,6 +66,9 @@ public class GlobalFunction {
         }
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm hideSoftKeyboard() ẩn bàn phím
+    // Ẩn bàn phím khi click vào bất kỳ vị trí nào trên màn hình
     public static void hideSoftKeyboard(Activity activity) {
         try {
             InputMethodManager inputMethodManager = (InputMethodManager) activity.
@@ -67,6 +83,9 @@ public class GlobalFunction {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm getTextSearch() loại bỏ dấu tiếng Việt
+    // Chuyển chuỗi có dấu thành chuỗi không dấu
     public static String getTextSearch(String input) {
         String nfdNormalizedString = Normalizer.normalize(input, Normalizer.Form.NFD);
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");

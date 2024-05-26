@@ -17,6 +17,9 @@ public class SignInActivity extends BaseActivity {
 
     private ActivitySignInBinding mActivitySignInBinding;
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onCreate() được gọi khi Activity được khởi tạo
+    // Khởi tạo giao diện đăng nhập
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +28,27 @@ public class SignInActivity extends BaseActivity {
 
         mActivitySignInBinding.rdbUser.setChecked(true);
 
+        // Khi click vào layoutSignUp thì chuyển sang màn hình đăng ký
         mActivitySignInBinding.layoutSignUp.setOnClickListener(
                 v -> GlobalFunction.startActivity(SignInActivity.this, SignUpActivity.class));
-
+        // Khi click vào btnSignIn thì gọi hàm onClickValidateSignIn()
         mActivitySignInBinding.btnSignIn.setOnClickListener(v -> onClickValidateSignIn());
+        // Khi click vào tvForgotPassword thì gọi hàm onClickForgotPassword()
         mActivitySignInBinding.tvForgotPassword.setOnClickListener(v -> onClickForgotPassword());
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickForgotPassword() chuyển sang màn hình quên mật khẩu
     private void onClickForgotPassword() {
         GlobalFunction.startActivity(this, ForgotPasswordActivity.class);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickValidateSignIn() kiểm tra thông tin đăng nhập
+    // Nếu email hoặc password rỗng thì hiển thị thông báo lỗi
+    // Nếu email không hợp lệ thì hiển thị thông báo lỗi
+    // Nếu email chứa chuỗi "admin" thì kiểm tra email và password
+    // Nếu thông tin hợp lệ thì gọi hàm signInUser() để đăng nhập
     private void onClickValidateSignIn() {
         String strEmail = mActivitySignInBinding.edtEmail.getText().toString().trim();
         String strPassword = mActivitySignInBinding.edtPassword.getText().toString().trim();
@@ -63,6 +76,11 @@ public class SignInActivity extends BaseActivity {
         }
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm signInUser() đăng nhập người dùng
+    // Sử dụng FirebaseAuth để đăng nhập với email và password
+    // Nếu đăng nhập thành công thì lưu thông tin người dùng vào DataStoreManager và chuyển sang MainActivity
+    // Nếu đăng nhập thất bại thì hiển thị thông báo lỗi
     private void signInUser(String email, String password) {
         showProgressDialog(true);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();

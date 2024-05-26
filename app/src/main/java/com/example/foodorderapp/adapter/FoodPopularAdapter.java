@@ -15,8 +15,9 @@ import com.example.foodorderapp.utils.GlideUtils;
 import java.util.List;
 
 public class FoodPopularAdapter extends RecyclerView.Adapter<FoodPopularAdapter.FoodPopularViewHolder> {
-
+    // Danh sách thức ăn
     private final List<Food> mListFoods;
+    // Interface click vào thức ăn
     public final IOnClickFoodItemListener iOnClickFoodItemListener;
 
     public FoodPopularAdapter(List<Food> mListFoods, IOnClickFoodItemListener iOnClickFoodItemListener) {
@@ -24,6 +25,9 @@ public class FoodPopularAdapter extends RecyclerView.Adapter<FoodPopularAdapter.
         this.iOnClickFoodItemListener = iOnClickFoodItemListener;
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Tạo view holder từ layout item_food_popular
+    // Trả về một view holder chứa layout item_food_popular
     @NonNull
     @Override
     public FoodPopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,6 +35,10 @@ public class FoodPopularAdapter extends RecyclerView.Adapter<FoodPopularAdapter.
         return new FoodPopularViewHolder(itemFoodPopularBinding);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hiển thị dữ liệu thức ăn lên view holder
+    // Hiển thị ảnh thức ăn, giảm giá thức ăn
+    // Bắt sự kiện click vào thức ăn
     @Override
     public void onBindViewHolder(@NonNull FoodPopularViewHolder holder, int position) {
         Food food = mListFoods.get(position);
@@ -48,6 +56,8 @@ public class FoodPopularAdapter extends RecyclerView.Adapter<FoodPopularAdapter.
         holder.mItemFoodPopularBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(food));
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Trả về số lượng thức ăn
     @Override
     public int getItemCount() {
         if (mListFoods != null) {
@@ -56,10 +66,14 @@ public class FoodPopularAdapter extends RecyclerView.Adapter<FoodPopularAdapter.
         return 0;
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Class chứa view holder của item_food_popular
     public static class FoodPopularViewHolder extends RecyclerView.ViewHolder {
 
+        // View binding của item_food_popular
         private final ItemFoodPopularBinding mItemFoodPopularBinding;
 
+        // Khởi tạo view holder của item_food_popular
         public FoodPopularViewHolder(@NonNull ItemFoodPopularBinding itemFoodPopularBinding) {
             super(itemFoodPopularBinding.getRoot());
             this.mItemFoodPopularBinding = itemFoodPopularBinding;
