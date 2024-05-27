@@ -49,23 +49,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/define_dimen_16"
         android:text="@string/payment_method"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_small" />
 
-    <TextView
+    <Spinner
+        android:id="@+id/spinner_payment_method"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="@string/payment_method_cash"
         android:background="@drawable/bg_white_shape_border_gray"
-        android:padding="@dimen/define_dimen_12"
         android:layout_marginTop="@dimen/define_dimen_5"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/text_size_small"
+        android:dropDownVerticalOffset="?android:attr/listPreferredItemHeightSmall" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/define_dimen_16"
         android:text="@string/feedback_name"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_small" />
 
     <EditText
@@ -85,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/define_dimen_16"
         android:text="@string/feedback_phone"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_small" />
 
     <EditText
@@ -104,6 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/define_dimen_16"
         android:text="@string/address_delivery"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_small" />
 
     <EditText
@@ -131,13 +135,13 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/define_dimen_10"
             android:layout_weight="1"
-            android:background="@drawable/bg_gray_shape_corner_6"
+            android:background="@drawable/bg_black_shape_corner_6"
             android:gravity="center"
             android:padding="@dimen/define_dimen_10"
             android:paddingStart="@dimen/define_dimen_16"
             android:paddingEnd="@dimen/define_dimen_16"
             android:text="@string/cancel"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_small" />
 
         <TextView

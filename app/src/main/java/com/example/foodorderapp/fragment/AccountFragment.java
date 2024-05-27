@@ -45,10 +45,15 @@ public class AccountFragment extends BaseFragment {
         GlobalFunction.startActivity(getActivity(), OrderHistoryActivity.class);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickChangePassword() chuyển sang màn hình đổi mật khẩu
     private void onClickChangePassword() {
         GlobalFunction.startActivity(getActivity(), ChangePasswordActivity.class);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickSignOut() đăng xuất tài khoản
+    // Đăng xuất tài khoản và chuyển sang màn hình đăng nhập
     private void onClickSignOut() {
         if (getActivity() == null) {
             return;

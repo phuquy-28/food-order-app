@@ -10,15 +10,22 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.foodorderapp.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    // Biến progressDialog chứa dialog progress
     protected MaterialDialog progressDialog, alertDialog;
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onCreate() được gọi khi Activity được khởi tạo
+    // Khởi tạo dialog progress
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         createProgressDialog();
-        createAlertDialog();
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm createProgressDialog() tạo dialog progress
+    // Hiển thị dialog progress khi thực hiện các tác vụ cần thời gian xử lý
     public void createProgressDialog() {
         progressDialog = new MaterialDialog.Builder(this)
                 .content(R.string.waiting_message)
@@ -26,6 +33,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .build();
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm showProgressDialog() hiển thị hoặc ẩn dialog progress
+    // Nếu value = true thì hiển thị dialog progress
+    // Nếu value = false thì ẩn dialog progress
     public void showProgressDialog(boolean value) {
         if (value) {
             if (progressDialog != null && !progressDialog.isShowing()) {
@@ -36,40 +47,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
-        }
-    }
-
-    public void dismissProgressDialog() {
-        if (progressDialog != null && progressDialog.isShowing()) {
-            progressDialog.dismiss();
-        }
-
-        if (alertDialog != null && alertDialog.isShowing()) {
-            alertDialog.dismiss();
-        }
-    }
-
-    public void createAlertDialog() {
-        alertDialog = new MaterialDialog.Builder(this)
-                .title(R.string.app_name)
-                .positiveText(R.string.action_ok)
-                .cancelable(false)
-                .build();
-    }
-
-    public void showAlertDialog(String errorMessage) {
-        alertDialog.setContent(errorMessage);
-        alertDialog.show();
-    }
-
-    public void showAlertDialog(@StringRes int resourceId) {
-        alertDialog.setContent(resourceId);
-        alertDialog.show();
-    }
-
-    public void setCancelProgress(boolean isCancel) {
-        if (progressDialog != null) {
-            progressDialog.setCancelable(isCancel);
         }
     }
 

@@ -6,22 +6,26 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
         tools:ignore="ProtectedPermissions" />
 
     <queries>
         <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <category android:name="android.intent.category.DEFAULT"/>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+
             <data android:scheme="https" />
         </intent>
     </queries>
 
     <application
-        android:name="com.example.foodorderapp.ControllerApplication"
+        android:name=".ControllerApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,7 +33,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.foodorderapp.activity.SplashActivity"
+        <activity
+            android:name=".activity.PaymentActivity"
+            android:launchMode="singleTask"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="orderzpdk"
+                    android:host="app" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,35 +56,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.foodorderapp.activity.MainActivity"
-            android:exported="false"/>
+            android:name=".activity.MainActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.FoodDetailActivity"
-            android:exported="false"/>
+            android:name=".activity.FoodDetailActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.SignUpActivity"
-            android:exported="false"/>
+            android:name=".activity.SignUpActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.SignInActivity"
-            android:exported="false"/>
+            android:name=".activity.SignInActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.ForgotPasswordActivity"
-            android:exported="false"/>
+            android:name=".activity.ForgotPasswordActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.ChangePasswordActivity"
-            android:exported="false"/>
+            android:name=".activity.ChangePasswordActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.AdminMainActivity"
-            android:exported="false"/>
+            android:name=".activity.AdminMainActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.OrderHistoryActivity"
-            android:exported="false"/>
+            android:name=".activity.OrderHistoryActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.AddFoodActivity"
-            android:exported="false"/>
+            android:name=".activity.AddFoodActivity"
+            android:exported="false" />
         <activity
-            android:name="com.example.foodorderapp.activity.AdminReportActivity"
-            android:exported="false"/>
+            android:name=".activity.AdminReportActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -64,20 +64,17 @@ public class FoodDetailActivity extends BaseActivity {
         GlideUtils.loadUrlBanner(mFood.getBanner(), mActivityFoodDetailBinding.imageFood);
         if (mFood.getSale() <= 0) {
             mActivityFoodDetailBinding.tvSaleOff.setVisibility(View.GONE);
-            mActivityFoodDetailBinding.tvPrice.setVisibility(View.GONE);
 
             String strPrice = mFood.getPrice() + Constant.CURRENCY;
             mActivityFoodDetailBinding.tvPriceSale.setText(strPrice);
         } else {
             mActivityFoodDetailBinding.tvSaleOff.setVisibility(View.VISIBLE);
-            mActivityFoodDetailBinding.tvPrice.setVisibility(View.VISIBLE);
 
             String strSale = "Giảm " + mFood.getSale() + "%";
             mActivityFoodDetailBinding.tvSaleOff.setText(strSale);
 
             String strPriceOld = mFood.getPrice() + Constant.CURRENCY;
-            mActivityFoodDetailBinding.tvPrice.setText(strPriceOld);
-            mActivityFoodDetailBinding.tvPrice.setPaintFlags(mActivityFoodDetailBinding.tvPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
 
             String strRealPrice = mFood.getRealPrice() + Constant.CURRENCY;
             mActivityFoodDetailBinding.tvPriceSale.setText(strRealPrice);

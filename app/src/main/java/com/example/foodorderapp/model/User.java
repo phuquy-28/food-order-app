@@ -2,6 +2,9 @@ package com.example.foodorderapp.model;
 
 import com.google.gson.Gson;
 
+// Người đảm nhận: Đặng Phú Quý
+// Lớp User lưu thông tin người dùng
+// Lưu thông tin email, mật khẩu và quyền admin của người dùng
 public class User {
 
     private String email;
@@ -40,6 +43,7 @@ public class User {
         isAdmin = admin;
     }
 
+    // Hàm toJSon() chuyển đối tượng User thành chuỗi JSON
     public String toJSon() {
         Gson gson = new Gson();
         return gson.toJson(this);

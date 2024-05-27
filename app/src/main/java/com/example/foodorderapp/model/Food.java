@@ -21,6 +21,7 @@ public class Food implements Serializable {
     private int count;
     private int totalPrice;
     private boolean popular;
+    private String category;
     @Ignore
     private List<Image> images;
 
@@ -117,5 +118,13 @@ public class Food implements Serializable {
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

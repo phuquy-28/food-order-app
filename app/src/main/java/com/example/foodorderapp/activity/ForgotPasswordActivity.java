@@ -12,16 +12,25 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private ActivityForgotPasswordBinding mActivityForgotPasswordBinding;
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onCreate() được gọi khi Activity được khởi tạo
+    // Khởi tạo giao diện quên mật khẩu
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityForgotPasswordBinding = ActivityForgotPasswordBinding.inflate(getLayoutInflater());
         setContentView(mActivityForgotPasswordBinding.getRoot());
-
+        // Khi click vào imgBack thì thoát Activity
         mActivityForgotPasswordBinding.imgBack.setOnClickListener(v -> onBackPressed());
+        // Khi click vào btnResetPassword thì gọi hàm onClickValidateResetPassword()
         mActivityForgotPasswordBinding.btnResetPassword.setOnClickListener(v -> onClickValidateResetPassword());
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickValidateResetPassword() kiểm tra thông tin email
+    // Nếu email rỗng thì hiển thị thông báo lỗi
+    // Nếu email không hợp lệ thì hiển thị thông báo lỗi
+    // Nếu thông tin hợp lệ thì gọi hàm resetPassword() để reset mật khẩu
     private void onClickValidateResetPassword() {
         String strEmail = mActivityForgotPasswordBinding.edtEmail.getText().toString().trim();
         if (StringUtil.isEmpty(strEmail)) {
@@ -33,6 +42,9 @@ public class ForgotPasswordActivity extends BaseActivity {
         }
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm resetPassword() reset mật khẩu
+    // Gửi email reset mật khẩu đến email đã nhập
     private void resetPassword(String email) {
         showProgressDialog(true);
         FirebaseAuth auth = FirebaseAuth.getInstance();

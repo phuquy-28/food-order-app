@@ -60,4 +60,8 @@ dependencies {
     implementation("com.afollestad.material-dialogs:core:0.9.6.0")
     // Indicator
     implementation("me.relex:circleindicator:2.1.6")
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(files("libs/zpdk-release-v3.1.aar"))
+    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+
 }

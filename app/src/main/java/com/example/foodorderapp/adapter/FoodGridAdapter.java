@@ -18,7 +18,9 @@ import java.util.List;
 
 public class FoodGridAdapter extends RecyclerView.Adapter<FoodGridAdapter.FoodGridViewHolder> {
 
+    // Danh sách thức ăn
     private final List<Food> mListFoods;
+    // Interface click vào thức ăn
     public final IOnClickFoodItemListener iOnClickFoodItemListener;
 
     public FoodGridAdapter(List<Food> mListFoods, IOnClickFoodItemListener iOnClickFoodItemListener) {
@@ -26,6 +28,9 @@ public class FoodGridAdapter extends RecyclerView.Adapter<FoodGridAdapter.FoodGr
         this.iOnClickFoodItemListener = iOnClickFoodItemListener;
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Tạo view holder từ layout item_food_grid
+    // Trả về một view holder chứa layout item_food_grid
     @NonNull
     @Override
     public FoodGridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,6 +38,10 @@ public class FoodGridAdapter extends RecyclerView.Adapter<FoodGridAdapter.FoodGr
         return new FoodGridViewHolder(itemFoodGridBinding);
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hiển thị dữ liệu thức ăn lên view holder
+    // Hiển thị ảnh thức ăn, giá thức ăn, tên thức ăn, giảm giá thức ăn
+    // Bắt sự kiện click vào thức ăn
     @Override
     public void onBindViewHolder(@NonNull FoodGridViewHolder holder, int position) {
         Food food = mListFoods.get(position);
@@ -62,18 +71,25 @@ public class FoodGridAdapter extends RecyclerView.Adapter<FoodGridAdapter.FoodGr
         }
         holder.mItemFoodGridBinding.tvFoodName.setText(food.getName());
 
+        // Bắt sự kiện click vào thức ăn
         holder.mItemFoodGridBinding.layoutItem.setOnClickListener(v -> iOnClickFoodItemListener.onClickItemFood(food));
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Trả về số lượng thức ăn
+    // Nếu danh sách thức ăn null thì trả về 0, ngược lại trả về số lượng thức ăn
     @Override
     public int getItemCount() {
         return null == mListFoods ? 0 : mListFoods.size();
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Class chứa view holder của item_food_grid
     public static class FoodGridViewHolder extends RecyclerView.ViewHolder {
-
+        // Binding layout item_food_grid
         private final ItemFoodGridBinding mItemFoodGridBinding;
 
+        // Khởi tạo view holder từ layout item_food_grid
         public FoodGridViewHolder(ItemFoodGridBinding itemFoodGridBinding) {
             super(itemFoodGridBinding.getRoot());
             this.mItemFoodGridBinding = itemFoodGridBinding;

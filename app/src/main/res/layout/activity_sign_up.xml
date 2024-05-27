@@ -7,6 +7,13 @@
     tools:ignore="Autofill, ContentDescription" >
 
     <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout2"
+        android:scaleType="centerCrop"
+        android:src="@drawable/top_background" />
+
+    <ImageView
         android:id="@+id/img_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,6 +21,7 @@
         android:src="@drawable/ic_back"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -44,32 +52,12 @@
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_password"
             android:layout_marginTop="@dimen/define_dimen_10"
+            android:hint="@string/hint_password"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
             android:textColor="@color/textColorPrimary"
             android:textSize="@dimen/text_size_small" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/define_dimen_20"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rdb_admin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/admin" />
-
-            <RadioButton
-                android:id="@+id/rdb_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/define_dimen_20"
-                android:text="@string/user" />
-        </RadioGroup>
 
         <Button
             android:id="@+id/btn_sign_up"
@@ -87,7 +75,7 @@
         android:id="@+id/layout_sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/linearLayout2"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="@dimen/define_dimen_18">
@@ -104,7 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/define_dimen_6"
             android:text="@string/sign_in"
-            android:textColor="@color/yellow"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 </RelativeLayout>
