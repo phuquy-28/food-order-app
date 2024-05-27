@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
+                android:textStyle="bold"
                 android:text="@string/food_name"/>
 
             <EditText
@@ -47,10 +48,12 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_category"/>
+                android:text="@string/food_category"
+                android:textStyle="bold"/>
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spn_category"
+                android:spinnerMode="dialog"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_white_corner_6_border_gray"
@@ -64,7 +67,8 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_description"/>
+                android:text="@string/food_description"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/edt_description"
@@ -86,7 +90,8 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_price"/>
+                android:text="@string/food_price"
+                android:textStyle="bold"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -126,7 +131,8 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_discount"/>
+                android:text="@string/food_discount"
+                android:textStyle="bold"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -166,7 +172,8 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_image"/>
+                android:text="@string/food_image"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/edt_image"
@@ -187,7 +194,8 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_image_banner"/>
+                android:text="@string/food_image_banner"
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/edt_image_banner"
@@ -202,10 +210,19 @@
                 android:textColor="@color/textColorPrimary"
                 android:textSize="@dimen/text_size_small" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="@color/textColorSecondary"
+                android:layout_marginTop="@dimen/define_dimen_10"
+                android:text="@string/food_populate"
+                android:textStyle="bold"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/define_dimen_10"
+                android:layout_marginTop="@dimen/define_dimen_4"
                 android:background="@drawable/bg_white_corner_6_border_gray"
                 android:padding="@dimen/define_dimen_12">
 
@@ -222,7 +239,8 @@
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/textColorSecondary"
                 android:layout_marginTop="@dimen/define_dimen_10"
-                android:text="@string/food_image_other"/>
+                android:text="@string/food_image_other"
+                android:textStyle="bold"/>
 
             <TextView
                 android:layout_width="match_parent"

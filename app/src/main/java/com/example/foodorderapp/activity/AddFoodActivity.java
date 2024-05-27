@@ -2,6 +2,7 @@ package com.example.foodorderapp.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.foodorderapp.ControllerApplication;
@@ -66,9 +67,17 @@ public class AddFoodActivity extends BaseActivity {
             mActivityAddFoodBinding.edtImageBanner.setText(mFood.getBanner());
             mActivityAddFoodBinding.chbPopular.setChecked(mFood.isPopular());
             mActivityAddFoodBinding.edtOtherImage.setText(getTextOtherImages());
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                    R.array.list_categories, android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mActivityAddFoodBinding.spnCategory.setAdapter(adapter);
         } else {
             mActivityAddFoodBinding.toolbar.tvTitle.setText(getString(R.string.add_food));
             mActivityAddFoodBinding.btnAddOrEdit.setText(getString(R.string.action_add));
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                    R.array.list_categories, android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mActivityAddFoodBinding.spnCategory.setAdapter(adapter);
         }
     }
 
