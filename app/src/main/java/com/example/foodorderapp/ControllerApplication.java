@@ -47,6 +47,6 @@ public class ControllerApplication extends Application {
     // Người đảm nhận: Đặng Phú Quý
     // Hàm getBookingDatabaseReference() trả về tham chiếu đến nhánh booking của Firebase Database
     public DatabaseReference getBookingDatabaseReference() {
-        return mFirebaseDatabase.getReference("/booking");
+        return mFirebaseDatabase.getReference("/order");
     }
 }
