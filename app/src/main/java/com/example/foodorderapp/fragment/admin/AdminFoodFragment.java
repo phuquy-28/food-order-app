@@ -25,7 +25,7 @@ import com.example.foodorderapp.activity.AdminMainActivity;
 import com.example.foodorderapp.adapter.AdminFoodAdapter;
 import com.example.foodorderapp.constant.Constant;
 import com.example.foodorderapp.constant.GlobalFunction;
-import com.example.foodorderapp.databinding.FragmentAdminHomeBinding;
+import com.example.foodorderapp.databinding.FragmentAdminFoodBinding;
 import com.example.foodorderapp.fragment.BaseFragment;
 import com.example.foodorderapp.listener.IOnManagerFoodListener;
 import com.example.foodorderapp.model.Food;
@@ -34,23 +34,29 @@ import com.example.foodorderapp.utils.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminHomeFragment extends BaseFragment {
+public class AdminFoodFragment extends BaseFragment {
 
-    private FragmentAdminHomeBinding mFragmentAdminHomeBinding;
+    private FragmentAdminFoodBinding mFragmentAdminFoodBinding;
     private List<Food> mListFood;
     private AdminFoodAdapter mAdminFoodAdapter;
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm liên kết và trả về giao diện fragment_admin_food.xml bằng thư viện view binding của Android
+    // Gọi hàm initView để khởi tạo RecyclerView để hiển thị danh sách món ăn
+    // Gọi hàm initListener để gán sự kiện cho các phần tử trong Fragment
+    // Gọi hàm getListFood để lấy danh sách món ăn từ Firebase Realtime Database
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mFragmentAdminHomeBinding = FragmentAdminHomeBinding.inflate(inflater, container, false);
-
+        mFragmentAdminFoodBinding = FragmentAdminFoodBinding.inflate(inflater, container, false);
         initView();
         initListener();
         getListFood("");
-        return mFragmentAdminHomeBinding.getRoot();
+        return mFragmentAdminFoodBinding.getRoot();
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để khởi tạo tiêu đề ban đầu cho Toolbar bằng hàm setToolBar của AdminMainActivity
     @Override
     protected void initToolbar() {
         if (getActivity() != null) {
@@ -58,41 +64,47 @@ public class AdminHomeFragment extends BaseFragment {
         }
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để khởi tạo RecyclerView và gắn Adapter vào để hiển thị danh sách món ăn ở chế độ dọc (LinearLayoutManager)
+    // Khởi tạo danh sách món ăn và Adapter AdminFoodAdapter
+    // Gán IOnManagerFoodListener cho Adapter để xử lý sự kiện khi người dùng click vào các nút sửa, xóa món ăn
+    // Ghi đè lại onClickUpdateFood và onClickDeleteFood để gọi hai hàm của Fragment này là onClickEditFood và deleteFoodItem
     private void initView() {
         if (getActivity() == null) {
             return;
         }
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mFragmentAdminHomeBinding.rcvFood.setLayoutManager(linearLayoutManager);
+        mFragmentAdminFoodBinding.rcvFood.setLayoutManager(linearLayoutManager);
         mListFood = new ArrayList<>();
         mAdminFoodAdapter = new AdminFoodAdapter(mListFood, new IOnManagerFoodListener() {
             @Override
             public void onClickUpdateFood(Food food) {
                 onClickEditFood(food);
             }
-
             @Override
             public void onClickDeleteFood(Food food) {
                 deleteFoodItem(food);
             }
         });
-        mFragmentAdminHomeBinding.rcvFood.setAdapter(mAdminFoodAdapter);
+        mFragmentAdminFoodBinding.rcvFood.setAdapter(mAdminFoodAdapter);
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để gán sự kiện cho các phần tử trong Fragment
+    // Gán sự kiện cho nút thêm món ăn bằng cách gọi hàm onClickAddFood
+    // Gán sự kiện cho nút tìm kiếm món ăn bằng cách gọi hàm searchFood
+    // Gán sự kiện cho EditText tìm kiếm món ăn bằng cách gọi hàm searchFood
     private void initListener() {
-        mFragmentAdminHomeBinding.btnAddFood.setOnClickListener(v -> onClickAddFood());
-
-        mFragmentAdminHomeBinding.imgSearch.setOnClickListener(view1 -> searchFood());
-
-        mFragmentAdminHomeBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
+        mFragmentAdminFoodBinding.btnAddFood.setOnClickListener(v -> onClickAddFood());
+        mFragmentAdminFoodBinding.imgSearch.setOnClickListener(v -> searchFood());
+        mFragmentAdminFoodBinding.edtSearchName.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchFood();
                 return true;
             }
             return false;
         });
-
-        mFragmentAdminHomeBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
+        mFragmentAdminFoodBinding.edtSearchName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -111,16 +123,26 @@ public class AdminHomeFragment extends BaseFragment {
         });
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để bắt đầu activity thêm món ăn bằng cách gọi hàm startActivity của GlobalFunction
     private void onClickAddFood() {
         GlobalFunction.startActivity(getActivity(), AddFoodActivity.class);
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để bắt đầu activity chỉnh sửa món ăn bằng cách gọi hàm startActivity của GlobalFunction
+    // Thêm dữ liệu món ăn vào Bundle để truyền qua activity chỉnh sửa món ăn
     private void onClickEditFood(Food food) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.KEY_INTENT_FOOD_OBJECT, food);
         GlobalFunction.startActivity(getActivity(), AddFoodActivity.class, bundle);
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm thực hiện xóa món ăn
+    // Cửa sổ Dialog hiện lên để hỏi xác nhận để xóa món ăn
+    // Nếu người dùng chọn "Đồng ý" thì xóa món ăn đó khỏi Firebase Realtime Database
+    // Nếu người dùng chọn "Hủy" thì không làm gì cả
     private void deleteFoodItem(Food food) {
         new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.msg_delete_title))
@@ -138,8 +160,11 @@ public class AdminHomeFragment extends BaseFragment {
                 .show();
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để thực hiện tìm kiếm món ăn bằng hàm getListFood
+    // Lấy từ khóa tìm kiếm từ EditText và gọi hàm getListFood có input là từ khóa tìm kiếm
     private void searchFood() {
-        String strKey = mFragmentAdminHomeBinding.edtSearchName.getText().toString().trim();
+        String strKey = mFragmentAdminFoodBinding.edtSearchName.getText().toString().trim();
         if (mListFood != null) {
             mListFood.clear();
         } else {
@@ -149,12 +174,17 @@ public class AdminHomeFragment extends BaseFragment {
         GlobalFunction.hideSoftKeyboard(getActivity());
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để lấy danh sách món ăn từ Firebase Realtime Database để load lên RecyclerView
+    // Nếu có từ khóa tìm kiếm thì sẽ lấy danh sách món ăn theo từ khóa tìm kiếm
+    // Nếu không có từ khóa tìm kiếm thì lấy toàn bộ danh sách món ăn
     public void getListFood(String keyword) {
         if (getActivity() == null) {
             return;
         }
         ControllerApplication.get(getActivity()).getFoodDatabaseReference()
                 .addChildEventListener(new ChildEventListener() {
+                    // Hàm dùng để thêm món ăn vào danh sách món ăn
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
@@ -172,7 +202,7 @@ public class AdminHomeFragment extends BaseFragment {
                         }
                         mAdminFoodAdapter.notifyDataSetChanged();
                     }
-
+                    // Hàm dùng để cập nhật món ăn trong danh sách món ăn
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
@@ -189,7 +219,7 @@ public class AdminHomeFragment extends BaseFragment {
                         }
                         mAdminFoodAdapter.notifyDataSetChanged();
                     }
-
+                    // Hàm dùng để xóa món ăn khỏi danh sách món ăn
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {

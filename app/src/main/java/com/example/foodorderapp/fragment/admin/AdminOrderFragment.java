@@ -30,6 +30,10 @@ public class AdminOrderFragment extends BaseFragment {
     private List<Order> mListOrder;
     private AdminOrderAdapter mAdminOrderAdapter;
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm liên kết và trả về giao diện fragment_admin_order.xml
+    // Gọi hàm initToolbar để khởi tạo tiêu đề ban đầu cho Toolbar
+    // Gọi hàm getListOrders để lấy danh sách hóa đơn từ Firebase Realtime Database để load lên RecyclerView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -40,6 +44,8 @@ public class AdminOrderFragment extends BaseFragment {
         return mFragmentAdminOrderBinding.getRoot();
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để khởi tạo tiêu đề ban đầu cho Toolbar bằng hàm setToolBar của AdminMainActivity
     @Override
     protected void initToolbar() {
         if (getActivity() != null) {
@@ -47,6 +53,10 @@ public class AdminOrderFragment extends BaseFragment {
         }
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để khởi tạo RecyclerView và gắn Adapter vào để hiển thị danh sách hóa đơn ở chế độ dọc (LinearLayoutManager)
+    // Khởi tạo danh sách hóa đơn rỗng và Adapter AdminOrderAdapter
+    // Gắn cho adapter sự kiện handleUpdateStatusOrder khi người dùng click vào checkbox trạng thái để cập nhật trạng thái hóa đơn
     private void initView() {
         if (getActivity() == null) {
             return;
@@ -59,12 +69,15 @@ public class AdminOrderFragment extends BaseFragment {
         mFragmentAdminOrderBinding.rcvOrder.setAdapter(mAdminOrderAdapter);
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để lấy danh sách hóa đơn từ Firebase Realtime Database để load lên RecyclerView
     public void getListOrders() {
         if (getActivity() == null) {
             return;
         }
         ControllerApplication.get(getActivity()).getBookingDatabaseReference()
                 .addChildEventListener(new ChildEventListener() {
+                    // Hàm dùng để thêm hóa đơn vào danh sách hóa đơn
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String s) {
@@ -75,7 +88,7 @@ public class AdminOrderFragment extends BaseFragment {
                         mListOrder.add(0, order);
                         mAdminOrderAdapter.notifyDataSetChanged();
                     }
-
+                    // Hàm dùng để cập nhật hóa đơn trong danh sách hóa đơn
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, String s) {
@@ -92,7 +105,7 @@ public class AdminOrderFragment extends BaseFragment {
                         }
                         mAdminOrderAdapter.notifyDataSetChanged();
                     }
-
+                    // Hàm dùng để xóa hóa đơn khỏi danh sách hóa đơn
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
@@ -120,6 +133,8 @@ public class AdminOrderFragment extends BaseFragment {
                 });
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để cập nhật trạng thái hóa đơn lên Firebase Realtime Database
     private void handleUpdateStatusOrder(Order order) {
         if (getActivity() == null) {
             return;
@@ -128,6 +143,8 @@ public class AdminOrderFragment extends BaseFragment {
                 .child(String.valueOf(order.getId())).child("completed").setValue(!order.isCompleted());
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để giải phóng bộ nhớ khi Fragment bị hủy
     @Override
     public void onDestroyView() {
         super.onDestroyView();

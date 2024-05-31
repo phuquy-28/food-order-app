@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_categories">
+        <item>Cơm</item>
+        <item>Bún/Phở</item>
+        <item>Mì</item>
+        <item>Đồ uống</item>
+    </string-array>
+</resources>
