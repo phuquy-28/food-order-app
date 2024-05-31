@@ -186,4 +186,7 @@
     <string name="missing_phone_input">Vui lòng nhập số điện thoại</string>
     <string name="phone_invalid_input">Số điện thoại không hợp lệ</string>
     <string name="missing_address_input">Vui lòng nhập địa chỉ</string>
+    <string name="msg_no_food_in_cart">Không có món ăn nào để tạo đơn hàng</string>
+    <string name="msg_nothing_selected">Không có phương thức nào được chọn</string>
+    <string name="msg_payment_success">Đặt hàng và thanh toán thành công</string>
 </resources>

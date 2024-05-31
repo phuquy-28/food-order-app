@@ -15,14 +15,18 @@ import java.util.List;
 
 public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueViewHolder> {
 
-    private final List<Order> mListOrder;
+    private final List<Order> mListOrder; // Danh sách hóa đơn
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm khởi tạo Adapter quản lý danh sách hóa đơn
     public RevenueAdapter(List<Order> mListOrder) {
         this.mListOrder = mListOrder;
     }
 
     @NonNull
     @Override
+    // Người đảm nhận: Trần Quốc Phương
+    // Tạo view holder từ layout item_revenue
     public RevenueViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemRevenueBinding itemRevenueBinding = ItemRevenueBinding.inflate(LayoutInflater.from(parent.getContext()),
                 parent, false);
@@ -30,6 +34,8 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueV
     }
 
     @Override
+    // Người đảm nhận: Trần Quốc Phương
+    // Hiển thị dữ liệu hóa đơn lên view holder
     public void onBindViewHolder(@NonNull RevenueViewHolder holder, int position) {
         Order order = mListOrder.get(position);
         if (order == null) {
@@ -43,6 +49,8 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueV
     }
 
     @Override
+    // Người đảm nhận: Trần Quốc Phương
+    // Trả về số lượng hóa đơn
     public int getItemCount() {
         if (mListOrder != null) {
             return mListOrder.size();
@@ -50,6 +58,8 @@ public class RevenueAdapter extends RecyclerView.Adapter<RevenueAdapter.RevenueV
         return 0;
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Class RevenueViewHolder dùng để chứa view của item_revenue
     public static class RevenueViewHolder extends RecyclerView.ViewHolder {
 
         private final ItemRevenueBinding mItemRevenueBinding;

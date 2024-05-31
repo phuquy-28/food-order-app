@@ -17,6 +17,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.TlsVersion;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này chứa các hàm gửi request lên server
+// Code mẫu cuả Zalo Pay trong document tích hợp thanh toán
 public class HttpProvider {
      public static JSONObject sendPost(String URL, RequestBody formBody) {
         JSONObject data = new JSONObject();

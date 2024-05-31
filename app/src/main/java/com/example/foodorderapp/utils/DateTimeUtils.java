@@ -5,11 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này chứa các hàm xử lý về thời gian
 public class DateTimeUtils {
 
     private static final String DEFAULT_FORMAT_DATE = "dd-MM-yyyy,hh:mm a";
     private static final String DEFAULT_FORMAT_DATE_2 = "dd/MM/yyyy";
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm chuyển đổi thời gian từ dạng timestamp sang dạng ngày tháng năm giờ phút giây
     public static String convertTimeStampToDate(long timeStamp) {
         String result = "";
         try {
@@ -22,6 +26,8 @@ public class DateTimeUtils {
         return result;
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm chuyển đổi thời gian từ timestamp sang dạng ngày tháng năm
     public static String convertTimeStampToDate_2(long timeStamp) {
         String result = "";
         try {
@@ -34,6 +40,8 @@ public class DateTimeUtils {
         return result;
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm chuyển đổi thời gian từ dạng ngày tháng năm sang timestamp
     public static String convertDate2ToTimeStamp(String strDate) {
         String result = "";
         if (strDate != null) {

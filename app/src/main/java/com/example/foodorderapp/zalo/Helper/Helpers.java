@@ -11,6 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này chứa các hàm giúp xử lý dữ liệu
+// Code mẫu của Zalo Pay trong document tích hợp thanh toán
 public class Helpers {
     private static int transIdDefault = 1;
 

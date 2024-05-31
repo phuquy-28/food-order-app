@@ -58,7 +58,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/view3"
+                android:id="@+id/rcv_food_payment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -109,7 +109,7 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/nameTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Họ và tên"
@@ -120,7 +120,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView28"
+                    android:id="@+id/phoneTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Số điện thoại"
@@ -129,7 +129,7 @@
                     android:textStyle="bold"
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                    app:layout_constraintTop_toBottomOf="@+id/nameTxt" />
 
                 <TextView
                     android:id="@+id/textView23"
@@ -141,7 +141,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView28" />
+                    app:layout_constraintTop_toBottomOf="@+id/phoneTxt" />
 
                 <ImageView
                     android:id="@+id/imageView10"
@@ -153,7 +153,7 @@
                     app:srcCompat="@drawable/location" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/addressTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -172,7 +172,7 @@
                     android:background="@color/grey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/imageView10"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24" />
+                    app:layout_constraintTop_toBottomOf="@+id/addressTxt" />
 
                 <TextView
                     android:id="@+id/textView25"
@@ -196,7 +196,7 @@
                     app:srcCompat="@drawable/credit_card" />
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/methodTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

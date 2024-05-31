@@ -16,6 +16,8 @@ public class StringUtil {
         return input == null || input.isEmpty() || ("").equals(input.trim());
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm getDoubleNumber() chuyển số thành chuỗi có 2 chữ số
     public static String getDoubleNumber(int number) {
         if (number < 10) {
             return "0" + number;

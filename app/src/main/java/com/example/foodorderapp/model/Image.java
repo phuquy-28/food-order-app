@@ -2,6 +2,9 @@ package com.example.foodorderapp.model;
 
 import java.io.Serializable;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class Image để lưu thông tin ảnh
+// Các thông tin bao gồm: url
 public class Image implements Serializable {
     private String url;
 

@@ -9,8 +9,9 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.foodorderapp.R;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này dùng để hiển thị ảnh với tỉ lệ khung hình cố định
 public class AspectRatioNoRadiusImageView extends AppCompatImageView {
-
     public static final int MEASUREMENT_WIDTH = 0;
     public static final int MEASUREMENT_HEIGHT = 1;
 
@@ -22,19 +23,29 @@ public class AspectRatioNoRadiusImageView extends AppCompatImageView {
     private boolean aspectRatioEnabled;
     private int dominantMeasurement;
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm khởi tạo
     public AspectRatioNoRadiusImageView(Context context) {
         this(context, null);
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm khởi tạo
     public AspectRatioNoRadiusImageView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm khởi tạo
+    // loadStateFromAttrs() lấy giá trị từ attrs
     public AspectRatioNoRadiusImageView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         loadStateFromAttrs(attrs);
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm lấy giá trị từ attrs
+    // Hàm này sử dụng để lấy giá trị từ attrs
     @SuppressLint("CustomViewStyleable")
     private void loadStateFromAttrs(AttributeSet attributeSet) {
         if (attributeSet == null) {
@@ -57,6 +68,8 @@ public class AspectRatioNoRadiusImageView extends AppCompatImageView {
         }
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm set tỉ lệ khung hình
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -80,37 +93,5 @@ public class AspectRatioNoRadiusImageView extends AppCompatImageView {
         }
 
         setMeasuredDimension(newWidth, newHeight);
-    }
-
-    public float getAspectRatio() {
-        return aspectRatio;
-    }
-
-    public void setAspectRatio(float aspectRatio) {
-        this.aspectRatio = aspectRatio;
-        if (aspectRatioEnabled) {
-            requestLayout();
-        }
-    }
-
-    public boolean getAspectRatioEnabled() {
-        return aspectRatioEnabled;
-    }
-
-    public void setAspectRatioEnabled(boolean aspectRatioEnabled) {
-        this.aspectRatioEnabled = aspectRatioEnabled;
-        requestLayout();
-    }
-
-    public int getDominantMeasurement() {
-        return dominantMeasurement;
-    }
-
-    public void setDominantMeasurement(int dominantMeasurement) {
-        if (dominantMeasurement != MEASUREMENT_HEIGHT && dominantMeasurement != MEASUREMENT_WIDTH) {
-            throw new IllegalArgumentException("Invalid measurement type.");
-        }
-        this.dominantMeasurement = dominantMeasurement;
-        requestLayout();
     }
 }

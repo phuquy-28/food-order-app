@@ -92,6 +92,8 @@ public class GlobalFunction {
         return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm showDatePicker() hiển thị DatePickerDialog để chọn ngày tháng năm
     public static void showDatePicker(Context context, String currentDate, final IGetDateListener getDateListener) {
         Calendar mCalendar = Calendar.getInstance();
         int currentDay = mCalendar.get(Calendar.DATE);
@@ -99,6 +101,7 @@ public class GlobalFunction {
         int currentYear = mCalendar.get(Calendar.YEAR);
         mCalendar.set(currentYear, currentMonth, currentDay);
 
+        // Nếu currentDate không rỗng thì lấy ngày tháng năm từ currentDate
         if (!StringUtil.isEmpty(currentDate)) {
             String[] split = currentDate.split("/");
             currentDay = Integer.parseInt(split[0]);
@@ -107,6 +110,7 @@ public class GlobalFunction {
             mCalendar.set(currentYear, currentMonth - 1, currentDay);
         }
 
+        // Hiển thị DatePickerDialog
         DatePickerDialog.OnDateSetListener callBack = (view, year, monthOfYear, dayOfMonth) -> {
             String date = StringUtil.getDoubleNumber(dayOfMonth) + "/" +
                     StringUtil.getDoubleNumber(monthOfYear + 1) + "/" + year;
@@ -118,11 +122,16 @@ public class GlobalFunction {
         datePicker.show();
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm getCurrentDateTime() lấy ngày tháng năm hiện tại
     public static String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         return sdf.format(new Date());
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm static getPositionCategory() trả về vị trí của danh mục
+    // Trả về vị trí của danh mục trong mảng danh mục được lưu trong category_array.xml
     public static int getPositionCategory(AddFoodActivity addFoodActivity, String category) {
         String[] arrayCategory = addFoodActivity.getResources().getStringArray(R.array.category_array);
         for (int i = 0; i < arrayCategory.length; i++) {

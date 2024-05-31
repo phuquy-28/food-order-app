@@ -2,6 +2,9 @@ package com.example.foodorderapp.zalo.Helper.HMac;
 
 import java.util.Locale;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này chứa các hàm xử lý về chuỗi hexa
+// Code mẫu của Zalo Pay trong document tích hợp thanh toán
 public class HexStringUtil {
     private static byte[] HEX_CHAR_TABLE = {
             (byte) '0', (byte) '1', (byte) '2', (byte) '3',

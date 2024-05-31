@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.foodorderapp.constant.GlobalFunction;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -25,17 +26,23 @@ public class OrderHistoryActivity extends BaseActivity {
     private List<Order> mListOrder;
     private OrderAdapter mOrderAdapter;
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm onCreate() được gọi khi Activity được khởi tạo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Ánh xạ giao diện activity_order_history.xml
         mActivityOrderHistoryBinding = ActivityOrderHistoryBinding.inflate(getLayoutInflater());
         setContentView(mActivityOrderHistoryBinding.getRoot());
 
-        initToolbar();
-        initView();
-        getListOrders();
+        initToolbar(); // Khởi tạo toolbar
+        initView(); // Khởi tạo RecyclerView để hiển thị danh sách hóa đơn
+        getListOrders(); // Lấy danh sách hóa đơn từ Firebase Realtime Database
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm dùng để khởi tạo toolbar (bao gồm nút back, tiêu đề và nút giỏ hàng)
+    // Gắn sự kiện khi click vào nút back, sẽ thoát khỏi Activity hiện tại
     private void initToolbar() {
         mActivityOrderHistoryBinding.toolbar.imgBack.setVisibility(View.VISIBLE);
         mActivityOrderHistoryBinding.toolbar.imgCart.setVisibility(View.GONE);
@@ -44,12 +51,18 @@ public class OrderHistoryActivity extends BaseActivity {
         mActivityOrderHistoryBinding.toolbar.imgBack.setOnClickListener(v -> onBackPressed());
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm dùng để khởi tạo RecyclerView để hiển thị danh sách hóa đơn ở chế độ dọc (LinearLayoutManager)
     private void initView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mActivityOrderHistoryBinding.rcvOrderHistory.setLayoutManager(linearLayoutManager);
     }
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm getListOrders() lấy danh sách hóa đơn từ Firebase Realtime Database
+    // Nếu danh sách hóa đơn có chứa hóa đơn thì hiển thị lên RecyclerView
     public void getListOrders() {
+        // Lấy danh sách hóa đơn từ Firebase Realtime Database
         ControllerApplication.get(this).getBookingDatabaseReference()
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -72,8 +85,10 @@ public class OrderHistoryActivity extends BaseActivity {
                         mActivityOrderHistoryBinding.rcvOrderHistory.setAdapter(mOrderAdapter);
                     }
 
+                    // Nếu có lỗi xảy ra thì hiển thị thông báo lỗi
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
+                        GlobalFunction.showToastMessage(OrderHistoryActivity.this, error.getMessage());
                     }
                 });
     }

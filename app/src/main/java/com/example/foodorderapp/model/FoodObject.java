@@ -3,6 +3,9 @@ package com.example.foodorderapp.model;
 import java.io.Serializable;
 import java.util.List;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class FoodObject để lưu thông tin món ăn
+// Các thông tin bao gồm: id, tên món ăn, mô tả, giá, giảm giá, ảnh, banner, món ăn phổ biến hay không, danh mục
 public class FoodObject implements Serializable {
 
     private long id;

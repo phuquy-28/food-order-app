@@ -22,18 +22,24 @@ public class AccountFragment extends BaseFragment {
 
     @Nullable
     @Override
+    // Người đảm nhận: Đặng Phú Quý
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Ánh xạ và trả về giao diện fragment_account.xml
         FragmentAccountBinding fragmentAccountBinding = FragmentAccountBinding.inflate(inflater, container, false);
-
+        // Hiển thị email người dùng
         fragmentAccountBinding.tvEmail.setText(DataStoreManager.getUser().getEmail());
-
+        // Gắn sự kiện onClickSignOut() khi người dùng click vào layout đăng xuất
         fragmentAccountBinding.layoutSignOut.setOnClickListener(v -> onClickSignOut());
+        // Gắn sự kiện onClickChangePassword() khi người dùng click vào layout đổi mật khẩu
         fragmentAccountBinding.layoutChangePassword.setOnClickListener(v -> onClickChangePassword());
+        // Gắn sự kiện onClickOrderHistory() khi người dùng click vào layout lịch sử đơn hàng
         fragmentAccountBinding.layoutOrderHistory.setOnClickListener(v -> onClickOrderHistory());
 
         return fragmentAccountBinding.getRoot();
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm dùng để khởi tạo tiêu đề ban đầu cho Toolbar bằng hàm setToolBar của MainActivity
     @Override
     protected void initToolbar() {
         if (getActivity() != null) {
@@ -41,6 +47,8 @@ public class AccountFragment extends BaseFragment {
         }
     }
 
+    // Người đảm nhận: Đặng Phú Quý
+    // Hàm onClickOrderHistory() chuyển sang màn hình lịch sử đơn hàng
     private void onClickOrderHistory() {
         GlobalFunction.startActivity(getActivity(), OrderHistoryActivity.class);
     }

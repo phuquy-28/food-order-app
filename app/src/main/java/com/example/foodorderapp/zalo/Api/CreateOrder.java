@@ -10,6 +10,9 @@ import java.util.Date;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này tạo ra một đơn hàng mới
+// Code mẫu của Zalo Pay trong document tích hợp thanh toán
 public class CreateOrder {
     private class CreateOrderData {
         String AppId;

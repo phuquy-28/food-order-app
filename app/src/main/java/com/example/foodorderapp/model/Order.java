@@ -2,6 +2,9 @@ package com.example.foodorderapp.model;
 
 import java.io.Serializable;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class Order để lưu thông tin đơn hàng
+// Các thông tin bao gồm: id, tên người đặt, email, số điện thoại, địa chỉ, số lượng, món ăn, hình thức thanh toán, trạng thái hoàn thành
 public class Order implements Serializable {
 
     private long id;

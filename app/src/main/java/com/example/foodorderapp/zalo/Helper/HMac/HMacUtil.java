@@ -14,6 +14,9 @@ import java.util.LinkedList;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+// Người đảm nhận: Đặng Minh Nhật
+// Class này chứa các hàm xử lý về HMAC
+// Code mẫu của Zalo Pay trong document tích hợp thanh toán
 public class HMacUtil {
     public static String HMACMD5 = "HmacMD5";
     public static String HMACSHA1 = "HmacSHA1";

@@ -12,12 +12,16 @@ import com.example.foodorderapp.fragment.HomeFragment;
 
 public class MainViewPagerAdapter extends FragmentStateAdapter {
 
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm khởi tạo Adapter
     public MainViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
     @NonNull
     @Override
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm dùng để tạo ra các trang con của ViewPager2 và trả về Fragment tương ứng với vị trí trang con của ViewPager2
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
@@ -38,6 +42,8 @@ public class MainViewPagerAdapter extends FragmentStateAdapter {
     }
 
     @Override
+    // Người đảm nhận: Đặng Minh Nhật
+    // Hàm dùng để trả về số lượng trang con của ViewPager2
     public int getItemCount() {
         return 4;
     }

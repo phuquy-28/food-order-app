@@ -8,9 +8,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity(tableName = "food")
+// Người đảm nhận: Đặng Minh Nhật
+// Sử dụng trong FoodDAO để thao tác với bảng food trong cơ sở dữ liệu
 public class Food implements Serializable {
-
     @PrimaryKey
+    // @PrimaryKey để đánh dấu trường id là khóa chính
     private long id;
     private String name;
     private String image;
