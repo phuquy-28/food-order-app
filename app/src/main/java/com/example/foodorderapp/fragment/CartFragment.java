@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.foodorderapp.activity.OrderHistoryActivity;
 import com.example.foodorderapp.activity.PaymentActivity;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -189,7 +190,6 @@ public class CartFragment extends BaseFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = parent.getItemAtPosition(position).toString();
-                // Do something with selectedItem
                 Log.e("Selected item : ", selectedItem);
                 if (selectedItem.equals(Constant.PAYMENT_METHOD_CASH)) {
                     typePayment = Constant.TYPE_PAYMENT_CASH;
@@ -201,7 +201,6 @@ public class CartFragment extends BaseFragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // Do something when nothing is selected
-
             }
         });
 
@@ -213,9 +212,19 @@ public class CartFragment extends BaseFragment {
             String strPhone = edtPhoneOrder.getText().toString().trim();
             String strAddress = edtAddressOrder.getText().toString().trim();
 
-            if (StringUtil.isEmpty(strName) || StringUtil.isEmpty(strPhone) || StringUtil.isEmpty(strAddress)) {
-                GlobalFunction.showToastMessage(getActivity(), getString(R.string.message_enter_infor_order));
-            } else {
+            if (StringUtil.isEmpty(strName)) {
+                GlobalFunction.showToastMessage(getActivity(), getString(R.string.missing_name_input));
+            }
+            else if (StringUtil.isEmpty(strPhone)){
+                GlobalFunction.showToastMessage(getActivity(), getString(R.string.missing_phone_input));
+            }
+            else if (StringUtil.isEmpty(strAddress)){
+                GlobalFunction.showToastMessage(getActivity(), getString(R.string.missing_address_input));
+            }
+            else if (strPhone.length() < 10 || strPhone.length() > 11){
+                GlobalFunction.showToastMessage(getActivity(), getString(R.string.phone_invalid_input));
+            }
+            else {
                 if (typePayment == Constant.TYPE_PAYMENT_ZALO) {
                     Intent intent = new Intent(getActivity(), PaymentActivity.class);
                     intent.putExtra("name", strName);

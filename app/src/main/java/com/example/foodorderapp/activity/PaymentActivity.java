@@ -167,8 +167,7 @@ public class PaymentActivity extends AppCompatActivity {
                                             FoodDatabase.getInstance(PaymentActivity.this).foodDAO().deleteAllFood();
                                         });
 
-                                Intent intentGoHome = new Intent(PaymentActivity.this, OrderHistoryActivity.class);
-                                startActivity(intentGoHome);
+                                finish();
                             }
                         });
                     }

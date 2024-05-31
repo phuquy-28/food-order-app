@@ -180,4 +180,8 @@
     <string name="one_star">Tệ 🫤</string>
     <string name="food_category">Danh mục (*)</string>
     <string name="msg_category_food_require">Vui lòng chọn danh mục.</string>
+    <string name="missing_name_input">Vui lòng nhập tên</string>
+    <string name="missing_phone_input">Vui lòng nhập số điện thoại</string>
+    <string name="phone_invalid_input">Số điện thoại không hợp lệ</string>
+    <string name="missing_address_input">Vui lòng nhập địa chỉ</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.foodorderapp.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.example.foodorderapp.fragment.CartFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.adapter.MoreImageAdapter;
