@@ -60,7 +60,7 @@ public class AdminFoodFragment extends BaseFragment {
     @Override
     protected void initToolbar() {
         if (getActivity() != null) {
-            ((AdminMainActivity) getActivity()).setToolBar(getString(R.string.home));
+            ((AdminMainActivity) getActivity()).setToolBar(getString(R.string.food));
         }
     }
 
