@@ -5,6 +5,7 @@ package com.example.foodorderapp.model;
 // Lưu thông tin tên, số điện thoại, email, bình luận, ngày gửi và số sao
 public class Feedback {
 
+    private long id;
     private String name;
     private String phone;
     private String email;
@@ -22,6 +23,14 @@ public class Feedback {
         this.comment = comment;
         this.date = date;
         this.start = start;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

@@ -15,7 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.example.foodorderapp.ControllerApplication;
 import com.example.foodorderapp.R;
 import com.example.foodorderapp.activity.AdminMainActivity;
-import com.example.foodorderapp.adapter.FeedbackAdapter;
+import com.example.foodorderapp.adapter.AdminFeedbackAdapter;
 import com.example.foodorderapp.databinding.FragmentAdminFeedbackBinding;
 import com.example.foodorderapp.fragment.BaseFragment;
 import com.example.foodorderapp.model.Feedback;
@@ -27,18 +27,23 @@ public class AdminFeedbackFragment extends BaseFragment {
 
     private FragmentAdminFeedbackBinding mFragmentAdminFeedbackBinding;
     private List<Feedback> mListFeedback;
-    private FeedbackAdapter mFeedbackAdapter;
+    private AdminFeedbackAdapter mAdminFeedbackAdapter;
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm liên kết và trả về giao diện fragment_admin_feedback.xml bằng thư viện view binding của Android
+    // Gọi hàm initView để khởi tạo RecyclerView để hiển thị danh sách phản hồi đánh giá
+    // Gọi hàm getListFeedback để lấy danh sách phản hồi đánh giá từ Firebase Realtime Database
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mFragmentAdminFeedbackBinding = FragmentAdminFeedbackBinding.inflate(inflater, container, false);
-
         initView();
         getListFeedback();
         return mFragmentAdminFeedbackBinding.getRoot();
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để khởi tạo tiêu đề ban đầu cho Toolbar bằng hàm setToolBar của AdminMainActivity
     @Override
     protected void initToolbar() {
         if (getActivity() != null) {
@@ -46,6 +51,8 @@ public class AdminFeedbackFragment extends BaseFragment {
         }
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để khởi tạo RecyclerView để hiển thị danh sách món ăn ở chế độ dọc (LinearLayoutManager)
     private void initView() {
         if (getActivity() == null) {
             return;
@@ -54,6 +61,8 @@ public class AdminFeedbackFragment extends BaseFragment {
         mFragmentAdminFeedbackBinding.rcvFeedback.setLayoutManager(linearLayoutManager);
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để lấy danh sách phản hồi đánh giá từ Firebase Realtime Database để load lên RecyclerView
     public void getListFeedback() {
         if (getActivity() == null) {
             return;
@@ -69,12 +78,13 @@ public class AdminFeedbackFragment extends BaseFragment {
                         }
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Feedback feedback = dataSnapshot.getValue(Feedback.class);
+                            feedback.setId(Long.parseLong(dataSnapshot.getKey()));
                             if (feedback != null) {
                                 mListFeedback.add(0, feedback);
                             }
                         }
-                        mFeedbackAdapter = new FeedbackAdapter(mListFeedback);
-                        mFragmentAdminFeedbackBinding.rcvFeedback.setAdapter(mFeedbackAdapter);
+                        mAdminFeedbackAdapter = new AdminFeedbackAdapter(mListFeedback);
+                        mFragmentAdminFeedbackBinding.rcvFeedback.setAdapter(mAdminFeedbackAdapter);
                     }
 
                     @Override

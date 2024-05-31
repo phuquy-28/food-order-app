@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity {
                 super.onPageSelected(position);
                 switch (position) {
                     case 0:
-                        mActivityMainBinding.bottomNavigation.getMenu().findItem(R.id.nav_home).setChecked(true);
+                        mActivityMainBinding.bottomNavigation.getMenu().findItem(R.id.nav_food).setChecked(true);
                         break;
 
                     case 1:
@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
 
         mActivityMainBinding.bottomNavigation.setOnNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_home) {
+            if (id == R.id.nav_food) {
                 mActivityMainBinding.viewpager2.setCurrentItem(0);
             } else if (id == R.id.nav_cart) {
                 mActivityMainBinding.viewpager2.setCurrentItem(1);

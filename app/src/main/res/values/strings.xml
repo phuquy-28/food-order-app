@@ -9,6 +9,7 @@
     <string name="contact">Liên hệ</string>
     <string name="account">Tài khoản</string>
     <string name="order">Đơn hàng</string>
+    <string name="food">Món ăn</string>
 
     // action
     <string name="action_ok">Đồng ý</string>
@@ -114,7 +115,6 @@
     <string name="label_date_to">Đến ngày:</string>
 
     <string name="food_name">Tên món ăn(*)</string>
-    <string name="food_category">Loại món ăn(*)</string>
     <string name="food_description">Mô tả món ăn(*)</string>
     <string name="food_price">Giá món ăn(*)</string>
     <string name="food_discount">Khuyến mại(*)</string>

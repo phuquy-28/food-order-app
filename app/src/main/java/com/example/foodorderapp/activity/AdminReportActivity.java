@@ -29,6 +29,11 @@ public class AdminReportActivity extends AppCompatActivity {
 
     private ActivityAdminReportBinding mActivityAdminReportBinding;
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để ánh xạ giao diện activity_admin_report.xml bằng thư viện view binding của Android
+    // Gọi hàm getListRevenue() để lấy danh sách doanh thu hiển thị lên Recycle View
+    // Gọi hàm initToolbar() để khởi tạo Toolbar và gán sự kiện khi người dùng click vào nút back
+    // Gọi hàm initListener() để khởi tạo lắng nghe sự kiện khi người dùng click chọn ngày bắt đầu và kết thúc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +45,19 @@ public class AdminReportActivity extends AppCompatActivity {
         getListRevenue();
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm khởi tạo Toolbar để hiện thị tiêu đề là "Doanh thu" và nút back
+    // Ẩn nút giỏ hàng và gán sự kiện khi người dùng click vào nút back
     private void initToolbar() {
         mActivityAdminReportBinding.toolbar.imgBack.setVisibility(View.VISIBLE);
         mActivityAdminReportBinding.toolbar.imgCart.setVisibility(View.GONE);
         mActivityAdminReportBinding.toolbar.tvTitle.setText(getString(R.string.revenue));
-
         mActivityAdminReportBinding.toolbar.imgBack.setOnClickListener(v -> onBackPressed());
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm khởi tạo lắng nghe sự kiện IOnSingleClickListener khi người dùng click chọn ngày bắt đầu và kết thúc
+    // Hiển thị DatePickerDialog để người dùng chọn ngày
     private void initListener() {
         mActivityAdminReportBinding.tvDateFrom.setOnClickListener(new IOnSingleClickListener() {
             @Override
@@ -59,7 +69,6 @@ public class AdminReportActivity extends AppCompatActivity {
                 });
             }
         });
-
         mActivityAdminReportBinding.tvDateTo.setOnClickListener(new IOnSingleClickListener() {
             @Override
             public void onSingleClick(View v) {
@@ -72,6 +81,9 @@ public class AdminReportActivity extends AppCompatActivity {
         });
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để lấy danh sách doanh thu từ Firebase Realtime Database
+    // Hiển thị danh sách doanh thu lên Recycle View
     private void getListRevenue() {
         ControllerApplication.get(this).getBookingDatabaseReference().addValueEventListener(new ValueEventListener() {
             @Override
@@ -85,13 +97,18 @@ public class AdminReportActivity extends AppCompatActivity {
                 }
                 handleDataHistories(list);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để kiểm tra xem hóa đơn có thể thêm vào danh sách doanh thu không
+    // Dựa vào ngày bắt đầu và kết thúc mà người dùng chọn để lấy danh sách doanh thu
+    // Nếu người dùng chỉ chọn ngày bắt đầu thì lấy hóa đơn từ ngày bắt đầu đến hôm nay
+    // Nếu người dùng chỉ chọn ngày kết thúc thì lấy hết hóa đơn đến ngày kết thúc
+    // Nếu hóa đơn nằm trong khoảng ngày bắt đầu và kết thúc thì lấy hóa đơn đó, ngược lại không lấy
     private boolean canAddOrder(@Nullable Order order) {
         if (order == null) {
             return false;
@@ -120,6 +137,9 @@ public class AdminReportActivity extends AppCompatActivity {
         return longOrder >= longDateFrom && longOrder <= longDateTo;
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để hiển thị danh sách doanh thu lên Recycle View
+    // Tính tổng doanh thu bằng cách gọi hàm getTotalValues() và gán giá trị vào textView tvTotalValue
     private void handleDataHistories(List<Order> list) {
         if (list == null) {
             return;
@@ -129,16 +149,16 @@ public class AdminReportActivity extends AppCompatActivity {
         RevenueAdapter revenueAdapter = new RevenueAdapter(list);
         mActivityAdminReportBinding.rcvOrderHistory.setAdapter(revenueAdapter);
 
-        // Calculate total
         String strTotalValue = getTotalValues(list) + Constant.CURRENCY;
         mActivityAdminReportBinding.tvTotalValue.setText(strTotalValue);
     }
 
+    // Người đảm nhận: Trần Quốc Phương
+    // Hàm dùng để tính tổng doanh thu
     private int getTotalValues(List<Order> list) {
         if (list == null || list.isEmpty()) {
             return 0;
         }
-
         int total = 0;
         for (Order order : list) {
             total += order.getAmount();
