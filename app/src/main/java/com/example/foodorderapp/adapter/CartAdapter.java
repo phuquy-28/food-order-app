@@ -22,7 +22,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     // Người đảm nhận: Đặng Minh Nhật
     // Interface để xử lý sự kiện khi người dùng click vào các nút xóa và cập nhật số lượng món ăn
     public interface IClickListener {
-        void clickDeteteFood(Food food, int position);
+        void clickDeleteFood(Food food, int position);
 
         void updateItemFood(Food food, int position);
     }
@@ -98,7 +98,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         });
         // Xử lý sự kiện khi người dùng click vào nút xóa để xóa món ăn khỏi giỏ hàng
         holder.mItemCartBinding.tvDelete.setOnClickListener(v
-                -> iClickListener.clickDeteteFood(food, holder.getAdapterPosition()));
+                -> iClickListener.clickDeleteFood(food, holder.getAdapterPosition()));
     }
 
     // Người đảm nhận: Đặng Minh Nhật

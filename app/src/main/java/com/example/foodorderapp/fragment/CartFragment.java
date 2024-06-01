@@ -112,7 +112,7 @@ public class CartFragment extends BaseFragment {
         mCartAdapter = new CartAdapter(mListFoodCart, new CartAdapter.IClickListener() {
             @Override
             // Hàm clickDeteteFood dùng để xóa món ăn khỏi giỏ hàng
-            public void clickDeteteFood(Food food, int position) {
+            public void clickDeleteFood(Food food, int position) {
                 deleteFoodFromCart(food, position);
             }
 

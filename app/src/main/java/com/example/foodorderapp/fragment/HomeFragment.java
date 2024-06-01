@@ -210,15 +210,16 @@ public class HomeFragment extends BaseFragment {
     }
 
     // Người đảm nhận: Đặng Phú Quý
-    // Hàm onRequestPermissionsResult() được gọi khi xin quyền ghi âm
-    // Nếu quyền ghi âm được cấp thì gọi hàm startSpeechRecognition()
+    // Xử lý kết quả trả về từ việc nhận dạng giọng nói
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_SPEECH_INPUT) {
             if (resultCode == getActivity().RESULT_OK && null != data) {
+                // Lấy kết quả nhận dạng được trả về
                 ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 mFragmentHomeBinding.edtSearchName.setText(result.get(0));
+                GlobalFunction.hideSoftKeyboard(getActivity());
                 searchFood();
             }
         }
